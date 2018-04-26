@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h2>Posts</h2>
+  <%= link_to("Create Post", new_user_post_path(current_user), :class => "btn btn-danger") %>
+</div>
+
+<% @posts.each do |post| %>
+
+  <%= link_to(user_post_path(post.user, post)) do %>
+    <div class="card">
+      <% if post.cover_picture? %>
+        <div class="row">
+          <div class="card-image col-md-4 col-xs-12">
+            <%= image_tag post.cover_picture.url(:thumb) %>
+          </div>
+          <div class="card-body col-md-8 col-xs-12" style="padding-left: 0px;">
+            <div class="card-title"><%= post.title %></div>
+            <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
+            <p class="card-text"><%= truncate(strip_tags(markdown.render(post.body)), length: 300) %></p>
+            <div class="card-tags">
+              <% post.tags.split(',').each do |tag| %>
+                <span class="label label-default"><%= tag %></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="card-body">
+          <div class="card-title"><%= post.title %></div>
+          <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
+          <p class="card-text"><%= truncate(strip_tags(markdown.render(post.body)), length: 300) %></p>
+          <div class="card-tags">
+            <% post.tags.split(',').each do |tag| %>
+              <span class="label label-default"><%= tag %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="card-actions">
+        <div class="action">
+          <div class="activity-time blur-text"><%= time_ago_in_words(post.created_at) %> ago</div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

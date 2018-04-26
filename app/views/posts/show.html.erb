@@ -1,0 +1,39 @@
+  <% if @post.user == current_user %>
+  <%= link_to user_posts_path(@user), class: 'btn btn-default' do %>
+  <span class="glyphicon glyphicon-list-alt"></span>
+  My Posts
+  <% end %>
+  <%= link_to edit_user_post_path(@user, @post), class: 'btn btn-primary' do %>
+  <span class="glyphicon glyphicon-pencil"></span>
+  Edit
+  <% end %>
+  <% end %>
+
+  <div class="page-header post-title" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(<%= @post.cover_picture %>) no-repeat center; background-size:cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;">
+    <h2 class="row"><%= @post.title %></h2>
+    <div class="row">
+      <div class="card-tags col-md-8 col-xs-12">
+        <% @post.tags.split(',').each do |tag| %>
+          <span class="label label-default"><%= tag %></span>
+        <% end %>
+      </div>
+      <div class="col-md-4 col-xs-12 author">- <%= @post.user.name %> <%= image_tag(@post.user.profile_picture, :class => "profile-picture") %></div>
+    </div>
+  </div>
+<% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
+<p><%= raw(markdown.render(@post.body)) %></p>
+<br><br>
+<div class="comments-wrapper">
+  <div class="page-header">
+    <h4>Comments <sup><span class="badge"><%= @post.comments.count %></span></sup></h4>
+  </div>
+  <div class="comment-form">
+    <%= form_for [@user, @post, Comment.new] do |f| %>
+    <%= f.text_area :body, placeholder: "Add a comment", :class => "form-control" %><br/>
+    <%= f.submit "Add Comment", :class => 'btn btn-default' %>
+    <% end %>
+  </div>
+  <div class="comments">
+    <%= render @post.comments if @post.comments.any? %>
+  </div>
+</div>

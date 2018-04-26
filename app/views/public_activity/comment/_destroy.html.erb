@@ -1,0 +1,7 @@
+<% if !activity.owner.nil? %>
+<div class="activity container">
+  <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %> <%= link_to(activity.owner.name, activity.owner) %> has deleted a comment <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
+</div>
+<% end %>
+
+

@@ -1,0 +1,65 @@
+<div class="page-header row">
+  <div class="col-md-5 col-xs-12">
+    <h1>Account Settings</h1>
+  </div>
+</div>
+<div class="row text-right">
+  <div class="col-md-12 col-xs-12">
+    <%= link_to users_path, class: 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-list-alt"></span>
+      Back
+    <% end %>
+    <%= link_to edit_user_path(@user), class: 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+      Edit
+    <% end %>
+  </div>
+</div>
+<div class="row container">
+  <div class="row profile-info">
+    <div class="col-md-2 col-xs-5">
+      <%= image_tag(@user.profile_picture, :class => "account-profile-picture") %>
+    </div>
+    <div class="col-md-5 col-xs-7">
+      <div class="row">
+      <h3><%= @user.name %></h3>
+      </div>
+      <div class="row">
+        <%= @user.email %>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row user-cards">
+    <div class="col-md-3 col-xs-12 card">
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-header">
+          Total Posts
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-body">
+          <span class="card-number-big"> <%= link_to(@user.posts.count, user_posts_path(@user)) %> </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-3 col-xs-12 card">
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-header">
+          Total Comments
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-body">
+          <span class="card-number-big"><%= @user.comments.count %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

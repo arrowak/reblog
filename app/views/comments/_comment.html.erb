@@ -1,0 +1,27 @@
+<% if comment.commentable_type == "Comment" %>
+<div class="comment-reply" id="comment-<%= comment.id %>">
+  <p class="text-muted"><strong><%= comment.user.name %></strong> replied on
+  <%= l(comment.created_at, format: '%B, %d %Y %H:%M') %></p>
+  <div class="comment-body"><%= comment.body %></div>
+  <br>
+</div>
+<% else %>
+<div class="comment" id="comment-<%= comment.id %>">
+  <p class="text-muted"><strong><%= comment.user.name %></strong> commented on
+  <%= l(comment.created_at, format: '%B, %d %Y %H:%M') %></p>
+  <div class="comment-body"><%= comment.body %></div>
+  <br>
+  <% if controller_name != "home" %>
+    <%= form_for [@user, @post, comment, Comment.new] do |f| %>
+      <%= f.text_area :body, placeholder: "Add a Reply", :class => "form-control", :required => true %><br/>
+      <%= f.submit "Reply", class: "btn btn-default btn-xs" %>
+    <% end %>
+
+    <% if comment.comments.any? %>
+    <div class="comment-reply-wrapper">
+      <%= render partial: comment.comments %>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+<% end %>

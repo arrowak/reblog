@@ -1,0 +1,9 @@
+<div class="page-header">
+  <%= link_to user_posts_path(@user), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    My Posts
+  <% end %>
+  <h1>New post</h1>
+</div>
+
+<%= render 'form' %>

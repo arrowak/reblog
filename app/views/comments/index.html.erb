@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to new_user_post_comment_path(@user, @post), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Comment
+  <% end %>
+  <h1>Listing comments</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Body</th>
+            <th>User</th>
+            <th>Post</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @comments.each do |comment| %>
+        <%= content_tag :tr, id: dom_id(comment), class: dom_class(comment) do %>
+                      <td><%= comment.body %></td>
+                      <td><%= comment.user.name %></td>
+                      <td><%= comment.post.title %></td>
+                    <td><%= link_to 'Show', user_post_comment_path(@user, @post, comment) %></td>
+          <td><%= link_to 'Edit', edit_user_post_comment_path(@user, @post, comment) %></td>
+          <td><%= link_to 'Destroy', user_post_comment_path(@user, @post, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

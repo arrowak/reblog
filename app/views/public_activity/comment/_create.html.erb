@@ -1,0 +1,31 @@
+<% if !activity.owner.nil? %>
+  <div class="activity">
+    <% if activity.trackable.commentable_type == "Comment" %>
+      <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %> <%= link_to(activity.owner.name, activity.owner) %> has replied to a comment on post
+      <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
+      <div class="activity-preview">
+        <div class="post-title">
+          <%= link_to(truncate(activity.trackable.post.title, :length => 60), user_post_path(activity.owner, activity.trackable.post, anchor: "comment-" + activity.trackable.id.to_s)) %>
+        </div>
+        <div class="comment">
+          <%= render activity.trackable.commentable %>
+        </div>
+        <div class="comment-reply-wrapper">
+          <%= render activity.trackable %>
+        </div>
+      </div>
+    <% else %>
+      <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %> <%= link_to(activity.owner.name, activity.owner) %> has commented on a post
+
+       <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
+       <div class="activity-preview">
+         <div class="post-title">
+           <%= link_to(truncate(activity.trackable.post.title, :length => 60), user_post_path(activity.owner, activity.trackable.post, anchor: "comment-" + activity.trackable.id.to_s)) %>
+         </div>
+         <div class="comment">
+           <%= render activity.trackable %>
+         </div>
+       </div>
+    <% end %>
+  </div>
+<% end %>
