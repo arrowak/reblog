@@ -12,15 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20180426131803) do
 
-  create_table "activities", force: :cascade do |t|
+  create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "trackable_type"
-    t.integer "trackable_id"
+    t.bigint "trackable_id"
     t.string "owner_type"
-    t.integer "owner_id"
+    t.bigint "owner_id"
     t.string "key"
     t.text "parameters"
     t.string "recipient_type"
-    t.integer "recipient_id"
+    t.bigint "recipient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
@@ -31,16 +31,16 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "body"
-    t.integer "user_id"
-    t.integer "post_id"
+    t.bigint "user_id"
+    t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "commentable_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "follows", force: :cascade do |t|
+  create_table "follows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "follower_type"
     t.integer "follower_id"
     t.string "followable_type"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["follower_id", "follower_type"], name: "fk_follows"
   end
 
-  create_table "likes", force: :cascade do |t|
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "liker_type"
     t.integer "liker_id"
     t.string "likeable_type"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["liker_id", "liker_type"], name: "fk_likes"
   end
 
-  create_table "mentions", force: :cascade do |t|
+  create_table "mentions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "mentioner_type"
     t.integer "mentioner_id"
     t.string "mentionable_type"
@@ -79,12 +79,12 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["mentioner_id", "mentioner_type"], name: "fk_mentions"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.text "body"
     t.text "tags"
-    t.integer "category_id"
-    t.integer "user_id"
+    t.bigint "category_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "cover_picture_file_name"
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", null: false
@@ -123,4 +123,8 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "posts", "categories"
+  add_foreign_key "posts", "users"
 end
