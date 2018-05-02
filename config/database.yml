@@ -31,8 +31,8 @@ test:
 
 production:
   <<: *default
-  database: d1cvn5av6s547m
-  username: jzkzpzpeuojgfb
-  password: eeba015906a1228b3373ac7a7c5e16ad946155b0881bd77c12b517fd503df930
-  host: ec2-54-204-46-236.compute-1.amazonaws.com
+  database: dcvmi2qnh8otgl
+  username: afyknwqxoqakpb
+  password: 1dfe79e706ebda1615cc95d4c137f8b410b87d779fcaf2365508c9fcfd1155bb
+  host: ec2-107-21-103-146.compute-1.amazonaws.com
   port: 5432
