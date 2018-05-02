@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @activities = PublicActivity::Activity.where(:trackable_type => 'Comment', :owner_type => 'User', :owner_id => current_user.id)
   end
 
   # GET /comments/1
@@ -84,7 +84,7 @@ class CommentsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:post_id])
+    @post = params[:post_id].present? ? Post.find(params[:post_id]) : nil
   end
 
   def find_commentable

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users do
     get '/follow', to: 'users#follow_user', as: 'follow'
     get '/unfollow', to: 'users#unfollow_user', as: 'unfollow'
+    get '/comments', to: 'comments#index', as: 'comments'
     resources :posts do
       get '/like', to: 'posts#like'
       resources :comments do

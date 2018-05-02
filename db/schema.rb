@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180426131803) do
 
-  create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "activities", force: :cascade do |t|
     t.string "trackable_type"
     t.bigint "trackable_id"
     t.string "owner_type"
@@ -31,13 +31,13 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
   end
 
-  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "comments", force: :cascade do |t|
     t.text "body"
     t.bigint "user_id"
     t.bigint "post_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "follows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "follows", force: :cascade do |t|
     t.string "follower_type"
     t.integer "follower_id"
     t.string "followable_type"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["follower_id", "follower_type"], name: "fk_follows"
   end
 
-  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "likes", force: :cascade do |t|
     t.string "liker_type"
     t.integer "liker_id"
     t.string "likeable_type"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["liker_id", "liker_type"], name: "fk_likes"
   end
 
-  create_table "mentions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "mentions", force: :cascade do |t|
     t.string "mentioner_type"
     t.integer "mentioner_id"
     t.string "mentionable_type"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["mentioner_id", "mentioner_type"], name: "fk_mentions"
   end
 
-  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.text "tags"
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", null: false

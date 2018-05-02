@@ -56,7 +56,7 @@
       </div>
       <div class="row">
         <div class="col-md-12 col-xs-12 card-body">
-          <span class="card-number-big"><%= @user.comments.count %></span>
+          <span class="card-number-big"><%= link_to(@user.comments.count, user_comments_path(@user)) %></span>
         </div>
       </div>
     </div>
