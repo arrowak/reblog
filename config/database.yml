@@ -32,3 +32,7 @@ test:
 production:
   <<: *default
   database: reblog
+  username: pvravybbihiysh
+  password: e23564ba1b726e2b671436eed1d8f031c9b1dd81080093fe1273608d8c8285ca
+  host: ec2-54-235-109-37.compute-1.amazonaws.com
+  port: 5432
