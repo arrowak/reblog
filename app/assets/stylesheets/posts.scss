@@ -36,11 +36,67 @@ body.controller-posts-index{
   }
 }
 body.controller-posts-show{
-  .post-title{
-    height  : 200px;
+  $size : 35px;
+
+  .social-share-button {
+    position         : fixed;
+    top              : 30%;
+    left             : 30px;
+
+    padding          : 5px 5px;
+
+    background-color : rgba(0,0,0,0.1);
+    text-align       : center;
+    border           : 1px solid rgba(0,0,0,0.1);
+
+    .ssb-icon {
+      display         : block;
+
+      height          : $size;
+      width           : $size;
+      margin          : 10px;
+
+      background-size : $size $size;
+    }
+    &::before {
+      content     : "Share";
+      font-weight : bold;
+    }
+  }
+
+  .post-header{
+    height  : 300px;
     padding : 15px;
 
     color   : #eee;
+
+    .post-title{
+      position : absolute;
+      bottom   : 15px;
+    }
+
+    .like{
+      clear           : both;
+
+      color           : #fff;
+      text-decoration : none;
+
+      &:hover{
+        text-decoration : none;
+      }
+      .like-count{
+        background : #3E8E30;
+      }
+    }
+
+    .liked{
+      margin-left : 5px;
+      color       : #3E8E30;
+    }
+  }
+
+  .post-body{
+    padding : 0px 55px;
   }
 
   .content-wrapper{
@@ -54,6 +110,10 @@ body.controller-posts-show{
 
   .author{
     text-align : right;
+    .follow{
+      margin     : 10px auto;
+      text-align : center !important;
+    }
   }
 
   .comment-form{
@@ -74,8 +134,8 @@ body.controller-posts-show{
     }
 
     .comment-body{
-      font-size : 14px;
-      line-height: 1.3em;
+      font-size   : 14px;
+      line-height : 1.3em;
     }
 
     .comment-reply-wrapper{

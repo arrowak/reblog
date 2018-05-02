@@ -9,20 +9,63 @@
   <% end %>
   <% end %>
 
-  <div class="page-header post-title" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(<%= @post.cover_picture %>) no-repeat center; background-size:cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;">
-    <h2 class="row"><%= @post.title %></h2>
-    <div class="row">
-      <div class="card-tags col-md-8 col-xs-12">
-        <% @post.tags.split(',').each do |tag| %>
-          <span class="label label-default"><%= tag %></span>
-        <% end %>
+<div class="fixed socialButtons">
+  <%= social_share_button_tag(@post.title, :allow_sites => %w(twitter facebook google_plus email tumblr), :desc => truncate(@post.body, length: 50), :image => @post.cover_picture, :'data-type' => 'photo') %>
+</div>
+
+  <div class="page-header post-header" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(<%= @post.cover_picture %>) no-repeat center; background-size:cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; position:relative;">
+    <div class="post-title col-xs-11 col-md-11">
+      <h2 class="row"><%= @post.title %></h2>
+      <div class="row">
+        <div class="card-tags col-md-8 col-xs-12">
+          <% @post.tags.split(',').each do |tag| %>
+            <span class="label label-default"><%= tag %></span>
+          <% end %>
+          <br><br>
+            <% if current_user.likes?(@post) %>
+                <%= link_to("#", class: "like async disabled", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+                  <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
+                <% end %>
+                <small><span class="liked glyphicon glyphicon-ok"></span><span class="liked">Liked</span></small>
+            <% else %>
+              <%= link_to("#", class: "like async", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+                <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
+              <% end %>
+            <% end %>
+
+        </div>
+        <div class="col-md-4 col-xs-12 author">
+          <div class="row">
+            - <%= @post.user.name %> <%= image_tag(@post.user.profile_picture, :class => "profile-picture") %>
+          </div>
+          <% if current_user != @user %>
+              <div class="row follow">
+                <% if current_user.follows?(@user) %>
+                    <%= link_to(user_unfollow_path(@user), class: "btn btn-xs btn-danger", id: "follow") do %>
+                      <span class="glyphicon glyphicon-minus"></span> Un-follow
+                    <% end %>
+                <% else %>
+                    <%= link_to(user_follow_path(@user), class: "btn btn-xs btn-success", id: "follow") do %>
+                      <span class="glyphicon glyphicon-plus"></span> follow
+                    <% end %>
+                <% end %>
+
+              </div>
+          <% end %>
+          </div>
       </div>
-      <div class="col-md-4 col-xs-12 author">- <%= @post.user.name %> <%= image_tag(@post.user.profile_picture, :class => "profile-picture") %></div>
     </div>
   </div>
 <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
-<p><%= raw(markdown.render(@post.body)) %></p>
-<br><br>
+<div class="post-body">
+  <p><%= raw(markdown.render(@post.body)) %></p>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+
+  </div>
+</div>
 <div class="comments-wrapper">
   <div class="page-header">
     <h4>Comments <sup><span class="badge"><%= @post.comments.count %></span></sup></h4>

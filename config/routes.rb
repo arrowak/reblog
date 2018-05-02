@@ -2,11 +2,15 @@ Rails.application.routes.draw do
   root to: 'home#index'
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   get '/posts', to: 'home#posts'
+  get '/posts/:id', to: 'posts#show', as: 'post'
 
   resources :categories
 
   resources :users do
+    get '/follow', to: 'users#follow_user', as: 'follow'
+    get '/unfollow', to: 'users#unfollow_user', as: 'unfollow'
     resources :posts do
+      get '/like', to: 'posts#like'
       resources :comments do
         resources :comments
       end

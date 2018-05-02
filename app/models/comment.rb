@@ -6,4 +6,5 @@ class Comment < ApplicationRecord
   validates :body, presence: true
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
+  acts_as_mentioner
 end

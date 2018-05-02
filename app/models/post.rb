@@ -6,4 +6,5 @@ class Post < ApplicationRecord
   validates_attachment_content_type :cover_picture, content_type: /\Aimage\/.*\z/
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
+  acts_as_likeable
 end

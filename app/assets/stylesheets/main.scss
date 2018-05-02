@@ -9,26 +9,24 @@
 }
 
 body{
-  background-color : rgba(245,245,245,1) !important;
-
+  background-color : #F5F4F2 !important;
 
   p{
-    margin: 10px 0px;
+    margin : 10px 0px;
   }
-
   &>.container{
-    padding          : 30px;
+    padding-top      : 10px;
+
     background-color : #fff;
-    font-family: 'Roboto', sans-serif !important;
+    font-family      : 'Roboto', sans-serif !important;
   }
 }
 
 form{
   .form-image{
-    text-align: center;
-
+    text-align : center;
     img{
-      width: 50%;
+      width : 50%;
     }
   }
 }
@@ -40,7 +38,7 @@ form{
 }
 
 .blur-text{
-  color: #888;
+  color : #888;
 }
 
 .blinkBackground{
@@ -67,4 +65,13 @@ img {
 
 .text-right{
   text-align : right;
+}
+
+.text-center{
+  text-align : center;
+}
+
+.footer{
+  margin: 30px 0px;
+  text-align: center;
 }

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :follow_user, :unfollow_user]
   before_action :authenticate_user!
 
   # GET /users
@@ -62,10 +62,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow_user
+    current_user.follow!(@user)
+    if current_user.follows?(@user)
+      render html: "true"
+    else
+      render html: "false"
+    end
+  end
+
+  def unfollow_user
+    current_user.unfollow!(@user)
+        if !current_user.follows?(@user)
+          render html: "true"
+        else
+          render html: "false"
+        end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = params[:id].present? ? User.find(params[:id]) : (params[:user_id].present? ? User.find(params[:user_id]) : nil)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

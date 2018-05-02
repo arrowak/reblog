@@ -9,6 +9,10 @@ class User < ApplicationRecord
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/user_default_dark.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  acts_as_liker
+  acts_as_mentionable
+  acts_as_follower
+  acts_as_followable
 
   # Function to concatenate the first name and last name of the user
   def name

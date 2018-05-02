@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like]
   before_action :set_user
   before_action :authenticate_user!
 
@@ -65,18 +65,27 @@ class PostsController < ApplicationController
     end
   end
 
+  def like
+    current_user.like!(@post)
+    if current_user.likes?(@post)
+      render html: @post.likers(User).count
+    else
+      render html: "false"
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id] || params[:post_id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:title, :body, :tags, :category_id, :cover_picture)
+    params.require(:post).permit(:title, :body, :tags, :category_id, :cover_picture, :likees_count)
   end
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = params[:user_id].present? ? User.find(params[:user_id]) : @post.user
   end
 end
