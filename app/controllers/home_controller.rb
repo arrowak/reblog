@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @activities = PublicActivity::Activity.order("created_at DESC")
+    @activities = nil
   end
 
   def posts
