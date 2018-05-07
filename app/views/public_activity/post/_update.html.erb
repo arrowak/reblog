@@ -2,9 +2,9 @@
   <div class="activity">
     <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %>
     <% if current_user.id == activity.owner.id %>
-        <%= link_to("You", activity.owner) %>
-    <% else %>
-        <%= link_to(current_user.owner.name, activity.owner) %>
-    <% end %> has updated the post <%= link_to(truncate(activity.trackable.title, :length => 50), user_post_path(activity.owner, activity.trackable)) %> <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
+              <%= link_to("You", user_path(activity.owner)) %>
+          <% else %>
+              <%= link_to(current_user.owner.name, user_path(activity.owner)) %>
+          <% end %> has updated the post <%= link_to(truncate(activity.trackable.title, :length => 50), user_post_path(activity.owner, activity.trackable)) %> <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
   </div>
 <% end %>

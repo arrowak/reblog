@@ -2,10 +2,10 @@
 <div class="activity container">
   <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %>
   <% if current_user.id == activity.owner.id %>
-      <%= link_to("You", activity.owner) %>
-  <% else %>
-      <%= link_to(current_user.owner.name, activity.owner) %>
-  <% end %> has deleted a comment <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
+            <%= link_to("You", user_path(activity.owner)) %>
+        <% else %>
+            <%= link_to(current_user.owner.name, user_path(activity.owner)) %>
+        <% end %> has deleted a comment <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
 </div>
 <% end %>
 
