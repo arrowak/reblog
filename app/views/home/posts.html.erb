@@ -1,5 +1,8 @@
 <div class="page-header">
   <h2>
+  <% if controller_name == "home" %>
+      Recent
+  <% end %>
   Posts
   <% if @context.present? %>
       <span class="blur-text"> - <%= @context %> </span>
@@ -49,7 +52,7 @@
     <% end %>
   <% end %>
 <% else %>
-  <h4 class="text-center blur-text">Whoops! There is nothing here.</h4>
+  <h4 class="text-center blur-text">Whoops! Looks like there is nothing here.</h4>
 <% end %>
 
 

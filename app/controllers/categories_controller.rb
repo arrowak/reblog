@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
   end
 
   def posts
-    @posts = @category.posts
+    @posts = @category.posts.order("created_at DESC")
     @context = @category.name
     respond_to do |format|
       format.html { render 'home/posts' }
