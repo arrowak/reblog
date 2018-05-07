@@ -3,9 +3,9 @@
     <% if activity.trackable.commentable_type == "Comment" %>
       <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %>
       <% if current_user.id == activity.owner.id %>
-          <%= link_to("You", activity.owner, activity.owner) %>
+          <%= link_to("You", activity.owner) %>
       <% else %>
-          <%= link_to(current_user.owner.name, activity.owner, activity.owner) %>
+          <%= link_to(current_user.owner.name, activity.owner) %>
       <% end %>
       has replied to a comment on post
       <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
