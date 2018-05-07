@@ -1,5 +1,10 @@
 <% if !activity.owner.nil? and activity.trackable.present? %>
   <div class="activity">
-    <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %> <%= link_to(current_user.id == activity.owner.id ? "You" : activity.owner.name, activity.owner, activity.owner) %> has created a new post <%= link_to(truncate(activity.trackable.title, :length => 50), user_post_path(activity.owner, activity.trackable)) %> <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
+    <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %>
+    <% if current_user.id == activity.owner.id %>
+        <%= link_to("You", activity.owner, activity.owner) %>
+    <% else %>
+        <%= link_to(current_user.owner.name, activity.owner, activity.owner) %>
+    <% end %> has created a new post <%= link_to(truncate(activity.trackable.title, :length => 50), user_post_path(activity.owner, activity.trackable)) %> <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
   </div>
 <% end %>

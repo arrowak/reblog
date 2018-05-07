@@ -1,6 +1,11 @@
 <% if !activity.owner.nil? %>
 <div class="activity">
-  <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %> <%= link_to(current_user.id == activity.owner.id ? "You" : activity.owner.name, activity.owner, activity.owner) %> has deleted a post <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
+  <%= image_tag(activity.owner.profile_picture, :class => "profile-picture") %>
+  <% if current_user.id == activity.owner.id %>
+      <%= link_to("You", activity.owner, activity.owner) %>
+  <% else %>
+      <%= link_to(current_user.owner.name, activity.owner, activity.owner) %>
+  <% end %> has deleted a post <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
 </div>
 <% end %>
 
