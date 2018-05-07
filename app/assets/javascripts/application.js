@@ -46,14 +46,37 @@ var like = function(e, ele) {
 
 var follow = function(e, ele) {
   e.preventDefault();
-  var url = $(ele).attr('href');
+  var url = $(ele).attr('data-link');
 
   $.ajax({
     url: url,
     success: function(data) {
       if (data == "true") {
-        $(ele).text("un-follow");
-        $(ele).removeClass('btn-success').addClass('btn-danger');
+        $('#follow').addClass('hidden');
+        $('#un-follow').removeClass('hidden');
+      } else {
+
+      }
+    },
+    error: function(data) {
+      alert('Error');
+    },
+    async: true
+  });
+
+  return true;
+};
+
+var unfollow = function(e, ele) {
+  e.preventDefault();
+  var url = $(ele).attr('data-link');
+
+  $.ajax({
+    url: url,
+    success: function(data) {
+      if (data == "true") {
+        $('#un-follow').addClass('hidden');
+        $('#follow').removeClass('hidden');
       } else {
 
       }

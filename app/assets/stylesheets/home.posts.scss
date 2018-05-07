@@ -1,5 +1,5 @@
 
-body.controller-home-posts{
+body.controller-home-posts, body.controller-posts-index, body.controller-categories-posts{
   a:not(.btn){
     color : #000;
     &:hover{
@@ -32,6 +32,9 @@ body.controller-home-posts{
       -ms-flex         : 1 1 auto;
       flex             : 1 1 auto;
 
+      .card-text{
+        padding : 5px;
+      }
       .card-title{
         margin-bottom : 10px;
 

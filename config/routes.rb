@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get '/posts', to: 'home#posts'
   get '/posts/:id', to: 'posts#show', as: 'post'
 
-  resources :categories
+  resources :categories do
+    get '/posts', to: 'categories#posts'
+  end
 
   resources :users do
     get '/follow', to: 'users#follow_user', as: 'follow'

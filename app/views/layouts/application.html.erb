@@ -18,46 +18,24 @@
   </head>
   <body class="controller-<%= controller.controller_name %>-<%= controller.action_name %>">
     <% if user_signed_in? %>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          </button>
-          <a href="/" class="navbar-brand"><img src="<%= image_path("favicon.ico") %>" alt=""></a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/posts">Posts</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="profile-picture" src="<%= current_user.profile_picture %>"> <%= current_user.name %> <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><%= link_to("My Posts", user_posts_path(current_user)) %></li>
-                <li role="separator" class="divider"></li>
-                <li><%= link_to("Account Settings", user_path(current_user)) %></li>
-                <li><%= link_to("Sign Out", destroy_user_session_path, method: :delete) %></li>
-              </ul>
-            </li>
-          </ul>
+    <%= render 'layouts/nav' %>
+    <% end %>
+
+    <div class="row main-wrapper">
+      <div class="col-sm-2 col-md-2">
+        <%= render 'layouts/left_nav' %>
+      </div>
+      <div class="col-sm-9 col-md-9 content">
+        <% flash.each do |name, msg| %>
+        <%= content_tag :div, class: "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do %>
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <%= msg %>
+          <% end %>
+        <% end %>
+        <div class="container-fluid content-wrapper">
+          <%= yield %>
         </div>
       </div>
-    </nav>
-    <% end %>
-    <div class="container content-wrapper">
-      <% flash.each do |name, msg| %>
-      <%= content_tag :div, class: "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do %>
-      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <%= msg %>
-      <% end %>
-      <% end %>
-      <%= yield %>
     </div>
     <div class="footer">
       <div class="footer-content">Arun Kolhapur &copy; 2018</div>

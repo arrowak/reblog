@@ -1,40 +1,5 @@
 
-body.controller-posts-index{
-  .card{
-    width         : 100%;
-    margin-bottom : 20px;
 
-    background    : rgba(245,245,245,1);
-    border        : 1px solid rgba(0,0,0,.125);
-    border-radius : .25rem;
-
-    .card-body{
-      padding          : 1.25rem;
-
-      -webkit-box-flex : 1;
-      -ms-flex         : 1 1 auto;
-      flex             : 1 1 auto;
-
-      .card-title{
-        margin-bottom : 10px;
-
-        font-size     : +1.5em;
-        font-weight   : bold;
-      }
-    }
-    .card-actions{
-      width            : 100%;
-      padding          : 1.25rem;
-
-      text-align       : right;
-      border-top       : 1px solid rgba(0,0,0,.125);
-
-      -webkit-box-flex : 1;
-      -ms-flex         : 1 1 auto;
-      flex             : 1 1 auto;
-    }
-  }
-}
 body.controller-posts-show{
   $size : 35px;
 
@@ -81,14 +46,19 @@ body.controller-posts-show{
       margin-left : 5px;
       color       : #3E8E30;
     }
+
+    .hidden{
+      display: none;
+    }
   }
 
   .post-body{
     padding : 0px 55px;
+    font-size   : +1.2em !important;
+
   }
 
   .content-wrapper{
-    font-size   : +1.2em !important;
     line-height : 1.8em !important;
   }
 

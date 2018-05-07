@@ -2,6 +2,26 @@
 .navbar {
 }
 
+/* make sidebar nav vertical */
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
 .page-header{
   h2{
     display : inline-block;
@@ -14,11 +34,15 @@ body{
   p{
     margin : 10px 0px;
   }
-  &>.container{
+  & .content{
     padding-top      : 10px;
 
     background-color : #fff;
     font-family      : 'Roboto', sans-serif !important;
+  }
+
+  &>.main-wrapper {
+    margin: 0px;
   }
 }
 

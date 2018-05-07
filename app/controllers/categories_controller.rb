@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:show, :edit, :update, :destroy, :posts]
   before_action :authenticate_user!
 
 
@@ -21,6 +21,14 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+  end
+
+  def posts
+    @posts = @category.posts
+    @context = @category.name
+    respond_to do |format|
+      format.html { render 'home/posts' }
+    end
   end
 
   # POST /categories
@@ -66,7 +74,7 @@ class CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.find(params[:id])
+      @category = Category.find(params[:id].present? ? params[:id] : (params[:category_id].present? ? params[:category_id] : nil))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

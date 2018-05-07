@@ -40,11 +40,18 @@
           <% if current_user != @user %>
               <div class="row follow">
                 <% if current_user.follows?(@user) %>
-                    <%= link_to(user_unfollow_path(@user), class: "btn btn-xs btn-danger", id: "follow") do %>
-                      <span class="glyphicon glyphicon-minus"></span> Un-follow
+                    <%= link_to("#", class: "btn btn-xs btn-danger", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
+                      <span class="glyphicon glyphicon-minus"></span> un-follow
+                    <% end %>
+
+                    <%= link_to("#", class: "btn btn-xs btn-success hidden", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
+                      <span class="glyphicon glyphicon-plus"></span> follow
                     <% end %>
                 <% else %>
-                    <%= link_to(user_follow_path(@user), class: "btn btn-xs btn-success", id: "follow") do %>
+                <%= link_to("#", class: "btn btn-xs btn-danger hidden", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
+                  <span class="glyphicon glyphicon-minus"></span> un-follow
+                <% end %>
+                    <%= link_to("#", class: "btn btn-xs btn-success", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
                       <span class="glyphicon glyphicon-plus"></span> follow
                     <% end %>
                 <% end %>
