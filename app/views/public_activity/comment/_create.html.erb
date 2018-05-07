@@ -7,7 +7,7 @@
       <% else %>
           <%= link_to(activity.owner.name, user_path(activity.owner)) %>
       <% end %>
-      has replied to a comment on post
+       replied to a comment on post
       <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
       <div class="activity-preview">
         <div class="post-title">
@@ -26,7 +26,7 @@
           <%= link_to("You", user_path(activity.owner)) %>
       <% else %>
           <%= link_to(activity.owner.name, user_path(activity.owner)) %>
-      <% end %> has commented on a post
+      <% end %> commented on a post
 
        <div class="activity-time"><%= time_ago_in_words(activity.created_at) %> ago</div>
        <div class="activity-preview">
