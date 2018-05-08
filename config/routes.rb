@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+  root to: 'home#posts'
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   get '/posts', to: 'home#posts'
   get '/posts/:id', to: 'posts#show', as: 'post'

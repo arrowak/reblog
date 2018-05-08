@@ -8,6 +8,9 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.where(:user => @user)
+    respond_to do |format|
+      format.html { render "home/posts" }
+    end
   end
 
   # GET /posts/1

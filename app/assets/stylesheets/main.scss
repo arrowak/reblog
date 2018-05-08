@@ -5,20 +5,23 @@
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
   .sidebar-nav .navbar .navbar-collapse {
-    padding: 0;
-    max-height: none;
+    max-height : none;
+    padding    : 0;
   }
+
   .sidebar-nav .navbar ul {
-    float: none;
-    display: block;
+    display : block;
+    float   : none;
   }
+
   .sidebar-nav .navbar li {
-    float: none;
-    display: block;
+    display : block;
+    float   : none;
   }
+
   .sidebar-nav .navbar li a {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top    : 12px;
+    padding-bottom : 12px;
   }
 }
 
@@ -31,19 +34,36 @@
 body{
   background-color : #F5F4F2 !important;
 
+  .navbar-inverse{
+    background-color : #344353;
+
+    li{
+      a{
+        color : #eee !important;
+      }
+    }
+    .dropdown-menu{
+
+      a{
+        color : #000 !important;
+      }
+    }
+  }
+
   p{
     margin : 10px 0px;
   }
+
   & .content{
     padding-top      : 10px;
-    padding-bottom: 20px;
+    padding-bottom   : 20px;
 
     background-color : #fff;
     font-family      : 'Roboto', sans-serif !important;
   }
 
   &>.main-wrapper {
-    margin: 0px;
+    margin : 0px;
   }
 }
 
@@ -96,8 +116,21 @@ img {
   text-align : center;
 }
 
+.vertical-center{
+  vertical-align : middle;
+}
+
+.vertical-text-bottom{
+  vertical-align : text-bottom;
+}
+
+.vertical-baseline{
+  vertical-align : baseline;
+}
+
 .footer{
-  margin: 30px 0px;
-  text-align: center;
-  color: #aaa;
+  margin     : 30px 0px;
+
+  color      : #aaa;
+  text-align : center;
 }
