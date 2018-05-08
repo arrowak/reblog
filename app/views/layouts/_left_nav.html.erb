@@ -1,26 +1,28 @@
-<div class="sidebar-nav">
-  <div class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      </button>
-      <span class="visible-xs navbar-brand">Categories</span>
-    </div>
-    <div class="navbar-collapse collapse sidebar-navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="disabled navbar-brand">Categories</li>
-        <% categories = Category.all %>
-        <% categories.each do |category| %>
-          <li>
-            <%= link_to(category_posts_path(category)) do %>
-              <%= category.name %> <span class="badge pull-right"><%= category.posts.count %></span>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
+<% if user_signed_in? %>
+  <div class="sidebar-nav">
+    <div class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <span class="visible-xs navbar-brand">Categories</span>
+      </div>
+      <div class="navbar-collapse collapse sidebar-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="disabled navbar-brand">Categories</li>
+          <% categories = Category.all %>
+          <% categories.each do |category| %>
+            <li>
+              <%= link_to(category_posts_path(category)) do %>
+                <%= category.name %> <span class="badge pull-right"><%= category.posts.count %></span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
