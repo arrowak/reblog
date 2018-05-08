@@ -48,6 +48,8 @@ gem 'md_simple_editor'
 
 gem 'paperclip', '~> 6.0.0'
 
+gem 'paperclip-cloudinary'
+
 gem 'socialization'
 
 gem 'social-share-button'

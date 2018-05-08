@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :comments
 
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/user_default_dark.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/user_default_dark.png", :storage => :cloudinary, :path => ':id/:style/:filename', :cloudinary_resource_type => :image
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   acts_as_liker
   acts_as_mentionable
