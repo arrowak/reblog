@@ -45,7 +45,7 @@
         <% end %>
         <div class="card-actions">
           <div class="action">
-            <div class="activity-time blur-text"><%= time_ago_in_words(post.created_at) %> ago</div>
+            <div class="activity-time blur-text"> <%= post.likes.count %> likes, <%= post.comments.count %> comments <%= time_ago_in_words(post.created_at) %> ago</div>
           </div>
         </div>
       </div>
