@@ -1,5 +1,4 @@
 
-
 body.controller-posts-show{
   $size : 35px;
 
@@ -48,13 +47,22 @@ body.controller-posts-show{
     }
 
     .hidden{
-      display: none;
+      display : none;
     }
   }
 
   .post-body{
-    font-size   : +1.2em !important;
-    margin: 0px auto;
+    margin    : 0px auto;
+    font-size : +1.2em !important;
+
+    img{
+      margin : 0px auto;
+    }
+
+    p{
+      text-indent: 50px;
+      margin-top: 25px;
+    }
   }
 
   .content-wrapper{
