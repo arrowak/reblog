@@ -109,6 +109,9 @@ $(document).on('ready turbolinks:load page:load', function() {
 var mdloaded = false;
 
 $(document).on('turbolinks:load', function() {
+
+  $('.post-body p').has('img').css('text-indent', 0);
+
   if (mdloaded) {
     (function() {
       var initializeEditor, insertAtCaret, md_simple_editor, preview;
