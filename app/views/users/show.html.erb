@@ -1,20 +1,23 @@
+<% if @user == current_user %>
 <div class="page-header row">
   <div class="col-md-5 col-xs-12">
     <h1>Account Settings</h1>
   </div>
 </div>
-<div class="row text-right">
-  <div class="col-md-12 col-xs-12">
-    <%= link_to users_path, class: 'btn btn-default' do %>
-      <span class="glyphicon glyphicon-list-alt"></span>
-      Back
-    <% end %>
-    <%= link_to edit_user_path(@user), class: 'btn btn-primary' do %>
-      <span class="glyphicon glyphicon-pencil"></span>
-      Edit
-    <% end %>
+
+  <div class="row text-right">
+    <div class="col-md-12 col-xs-12">
+      <%= link_to users_path, class: 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        Back
+      <% end %>
+      <%= link_to edit_user_path(@user), class: 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
 <div class="row container">
   <div class="row profile-info">
     <div class="col-md-2 col-xs-5">
@@ -30,18 +33,23 @@
     </div>
   </div>
 
-  <hr>
-
+<div class="page-header blur-text"><h2>Activity</h2></div>
   <div class="row user-cards container">
     <div class="col-md-3 col-xs-12 card">
       <div class="row">
         <div class="col-md-12 col-xs-12 card-header">
-          Total Posts
+          Posts
         </div>
       </div>
       <div class="row">
         <div class="col-md-12 col-xs-12 card-body">
-          <span class="card-number-big"> <%= link_to(@user.posts.count, user_posts_path(@user)) %> </span>
+          <span class="card-number-big">
+            <% if @user.posts.any? %>
+              <%= link_to(@user.posts.count, user_posts_path(@user)) %>
+            <% else %>
+              <%= @user.posts.count %>
+            <% end %>
+          </span>
         </div>
       </div>
     </div>
@@ -51,15 +59,86 @@
     <div class="col-md-3 col-xs-12 card">
       <div class="row">
         <div class="col-md-12 col-xs-12 card-header">
-          Total Comments
+          Comments
         </div>
       </div>
       <div class="row">
         <div class="col-md-12 col-xs-12 card-body">
-          <span class="card-number-big"><%= link_to(@user.comments.count, user_comments_path(@user)) %></span>
+          <span class="card-number-big">
+            <% if @user.comments.any? %>
+                <%= link_to(@user.comments.count, user_comments_path(@user)) %>
+            <% else %>
+                <%= @user.comments.count %>
+            <% end %>
+          </span>
         </div>
       </div>
     </div>
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-3 col-xs-12 card">
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-header">
+          Likes
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-body">
+          <span class="card-number-big">
+            <% if @user.likees(Post).any? %>
+                <%= @user.likees(Post).count %>
+            <% else %>
+                <%= @user.likees(Post).count %>
+            <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row user-cards container">
+    <div class="col-md-3 col-xs-12 card">
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-header">
+          Followers
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-body">
+          <span class="card-number-big">
+            <% if @user.followers(User).any? %>
+                <%= link_to @user.followers(User).count, user_followers_path(@user) %>
+            <% else %>
+                <%= @user.followers(User).count %>
+            <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-3 col-xs-12 card">
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-header">
+          Following
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xs-12 card-body">
+          <span class="card-number-big">
+            <% if @user.followees(User).any? %>
+                <%= link_to @user.followees(User).count, user_following_path(@user) %>
+            <% else %>
+                <%= @user.followees(User).count %>
+            <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>

@@ -1,8 +1,40 @@
 
-body.controller-users-show{
+body.controller-users-show, body.controller-users-index, body.controller-users-followers, body.controller-users-following{
   .account-profile-picture {
     width : 150px;
   }
+
+  .user-picture {
+    position              : relative;
+    display: inline-block;
+
+    overflow              : hidden;
+    height                : 50px;
+    width                 : 50px;
+
+    border-radius         : 50%;
+
+    -webkit-border-radius : 50%;
+    -moz-border-radius    : 50%;
+    -ms-border-radius     : 50%;
+    -o-border-radius      : 50%;
+    vertical-align: middle;
+
+    img {
+      display : inline;
+
+      height  : 100%;
+      width   : auto;
+      margin  : 0 auto;
+      vertical-align: baseline;
+    }
+  }
+
+  .user-details{
+    display: inline-block;
+    margin-left: 10px;
+  }
+
   .card{
     margin-bottom : 20px;
     padding       : 15px;
@@ -28,6 +60,15 @@ body.controller-users-show{
         font-size  : 60px;
         text-align : center;
       }
+    }
+  }
+
+  .users-list{
+    li{
+      margin          : 0px;
+      padding         : 5px;
+
+      list-style-type : none;
     }
   }
 }

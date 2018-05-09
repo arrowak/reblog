@@ -116,6 +116,14 @@ img {
   text-align : center;
 }
 
+.text-white{
+  color: #fff;
+  &:hover{
+    color: #bbb;
+    text-decoration: none;
+  }
+}
+
 .vertical-center{
   vertical-align : middle;
 }
@@ -134,3 +142,5 @@ img {
   color      : #aaa;
   text-align : center;
 }
+
+

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :follow_user, :unfollow_user]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :follow_user, :unfollow_user, :followers, :following]
   before_action :authenticate_user!
 
   # GET /users
@@ -78,6 +78,22 @@ class UsersController < ApplicationController
         else
           render html: "false"
         end
+  end
+
+  def followers
+    @users = @user.followers(User)
+    @header = "Followers"
+    respond_to do |format|
+      format.html { render 'index' }
+    end
+  end
+
+  def following
+    @users = @user.followees(User)
+    @header = "Following"
+    respond_to do |format|
+      format.html { render 'index' }
+    end
   end
 
   private

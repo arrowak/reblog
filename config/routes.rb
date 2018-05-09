@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'home#posts'
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   get '/posts', to: 'home#posts'
+  get '/activity', to: 'home#index'
   get '/posts/:id', to: 'posts#show', as: 'post'
 
   resources :categories do
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
     get '/follow', to: 'users#follow_user', as: 'follow'
     get '/unfollow', to: 'users#unfollow_user', as: 'unfollow'
     get '/comments', to: 'comments#index', as: 'comments'
+    get '/followers', to: 'users#followers', as: 'followers'
+    get '/following', to: 'users#following', as: 'following'
     resources :posts do
       get '/like', to: 'posts#like'
       resources :comments do

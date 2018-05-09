@@ -1,70 +1,72 @@
-  <% if @post.user == current_user %>
-  <%= link_to user_posts_path(@user), class: 'btn btn-default' do %>
-  <span class="glyphicon glyphicon-list-alt"></span>
-  My Posts
-  <% end %>
-  <%= link_to edit_user_post_path(@user, @post), class: 'btn btn-primary' do %>
-  <span class="glyphicon glyphicon-pencil"></span>
-  Edit
-  <% end %>
-  <% end %>
-
-  <div class="page-header post-header row" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(<%= @post.cover_picture %>) no-repeat center; background-size:cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; position:relative;">
-    <div class="post-title col-xs-12 col-md-12">
-      <h2 class="row"><%= @post.title %></h2>
-      <div class="row">
-        <div class="card-tags col-md-8 col-xs-12">
-          <% @post.tags.split(',').each do |tag| %>
-            <span class="label label-default"><%= tag %></span>
-          <% end %>
-        </div>
+<% if @post.user == current_user %>
+<%= link_to user_posts_path(@user), class: 'btn btn-default' do %>
+<span class="glyphicon glyphicon-list-alt"></span>
+My Posts
+<% end %>
+<%= link_to edit_user_post_path(@user, @post), class: 'btn btn-primary' do %>
+<span class="glyphicon glyphicon-pencil"></span>
+Edit
+<% end %>
+<% end %>
+<div class="page-header post-header row" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(<%= @post.cover_picture %>) no-repeat center; background-size:cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; position:relative;">
+  <div class="post-title col-xs-12 col-md-12">
+    <h2 class="row"><%= @post.title %></h2>
+    <div class="row">
+      <div class="card-tags col-md-8 col-xs-12">
+        <% @post.tags.split(',').each do |tag| %>
+        <span class="label label-default"><%= tag %></span>
+        <% end %>
       </div>
-      <div class="row">
-        <div class="like-wrapper col-xs-6 col-md-6">
-          <% if current_user.likes?(@post) %>
-              <%= link_to("#", class: "like async disabled", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
-                <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
-              <% end %>
-              <small><span class="liked glyphicon glyphicon-ok"></span><span class="liked">Liked</span></small>
-          <% else %>
-            <%= link_to("#", class: "like async", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
-              <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
-            <% end %>
-          <% end %>
-        </div>
-
-        <div class="col-md-6 col-xs-6 author">
+    </div>
+    <div class="row">
+      <div class="like-wrapper col-xs-6 col-md-6">
+        <% if current_user.likes?(@post) %>
+        <%= link_to("#", class: "like async disabled", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+        <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
+        <% end %>
+        <small><span class="liked glyphicon glyphicon-ok"></span><span class="liked">Liked</span></small>
+        <% else %>
+        <%= link_to("#", class: "like async", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+        <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
+        <% end %>
+        <% end %>
+      </div>
+      <div class="col-md-6 col-xs-6 author">
+        <%= link_to(user_path(@post.user), :class => "text-white") do %>
           <div class="row">
             - <%= @post.user.name %> <%= image_tag(@post.user.profile_picture, :class => "profile-picture") %>
           </div>
-          <% if current_user != @user %>
-              <div class="row follow">
-                <% if current_user.follows?(@user) %>
-                    <%= link_to("#", class: "btn btn-xs btn-danger", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
-                      <span class="glyphicon glyphicon-minus"></span> un-follow
-                    <% end %>
-
-                    <%= link_to("#", class: "btn btn-xs btn-success hidden", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
-                      <span class="glyphicon glyphicon-plus"></span> follow
-                    <% end %>
-                <% else %>
-                <%= link_to("#", class: "btn btn-xs btn-danger hidden", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
-                  <span class="glyphicon glyphicon-minus"></span> un-follow
-                <% end %>
-                    <%= link_to("#", class: "btn btn-xs btn-success", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
-                      <span class="glyphicon glyphicon-plus"></span> follow
-                    <% end %>
-                <% end %>
-
-              </div>
+        <% end %>
+        <% if current_user != @user %>
+        <div class="row follow">
+          <% if current_user.follows?(@user) %>
+          <%= link_to("#", class: "btn btn-xs btn-danger", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
+          <span class="glyphicon glyphicon-minus"></span> un-follow
+          <% end %>
+          <%= link_to("#", class: "btn btn-xs btn-success hidden", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
+          <span class="glyphicon glyphicon-plus"></span> follow
+          <% end %>
+          <% else %>
+          <%= link_to("#", class: "btn btn-xs btn-danger hidden", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
+          <span class="glyphicon glyphicon-minus"></span> un-follow
+          <% end %>
+          <%= link_to("#", class: "btn btn-xs btn-success", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
+          <span class="glyphicon glyphicon-plus"></span> follow
+          <% end %>
           <% end %>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
-<% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
-<div class="post-body">
-  <p><%= raw(markdown.render(@post.body)) %></p>
+</div>
+<div class="row">
+  <div class="col-xs-1 col-md-1"></div>
+  <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
+  <div class="post-body col-xs-10 col-md-10">
+    <p><%= raw(markdown.render(@post.body)) %></p>
+  </div>
+  <div class="col-xs-1 col-md-1"></div>
 </div>
 <br>
 <div class="row">

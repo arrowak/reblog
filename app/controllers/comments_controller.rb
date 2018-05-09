@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @activities = PublicActivity::Activity.where(:trackable_type => 'Comment', :owner_type => 'User', :owner_id => current_user.id)
+    @activities = PublicActivity::Activity.where(:trackable_type => 'Comment', :owner_type => 'User', :owner_id => @user.id)
   end
 
   # GET /comments/1
