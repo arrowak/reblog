@@ -54,6 +54,8 @@ body.controller-posts-show{
   .post-body{
     margin    : 0px auto;
     font-size : +1.2em !important;
+    text-align: justify;
+    word-wrap: break-word;
 
     img{
       margin : 0px auto;
