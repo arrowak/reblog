@@ -98,6 +98,10 @@ $(document).on('ready turbolinks:load page:load', function() {
     }
   });
 
+  window.dataLayer = window.dataLayer || [];
+  gtag('js', new Date());
+  gtag('config', 'UA-36070617-2');
+
 
   $('#' + location.hash.substr(1)).addClass("blinkBackground blink");
   setTimeout(function() {
