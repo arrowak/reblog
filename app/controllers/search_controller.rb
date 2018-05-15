@@ -23,7 +23,7 @@ class SearchController < ApplicationController
 
     if users.any?
       users.each do |user|
-        search["suggestions"].push({"name" => "user:#{user.id}", "value" => user.first_name.capitalize!, "data" => {"category" => "Users"}})
+        search["suggestions"].push({"name" => "user:#{user.id}", "value" => user.name, "data" => {"category" => "Users"}})
       end
       search["suggestions"].push({"name" => "user:more,text:#{query}", "value" => "more..", "data" => {"category" => "Users"}})
     end
