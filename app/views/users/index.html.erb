@@ -1,6 +1,10 @@
 <% if @header.present? %>
     <div class="page-header">
-      <h1><%= @header %> [ <small class="blur-text"><%= @user.name %></small> ] </h1>
+      <h1><%= @header %>
+        <% if @user.present? %>
+        [ <small class="blur-text"><%= @user.name %></small> ]
+        <% end %>
+      </h1>
     </div>
 <% end %>
 

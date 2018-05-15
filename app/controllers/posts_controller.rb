@@ -77,6 +77,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    query = params[:query]
+    @posts = Post.where('title ILIKE ?', "%#{query}%")
+    @context = "[ Search: '" + query + "' ]"
+    respond_to do |format|
+      format.html { render 'home/posts' }
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_post

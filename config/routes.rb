@@ -4,6 +4,16 @@ Rails.application.routes.draw do
   get '/posts', to: 'home#posts'
   get '/activity', to: 'home#index'
   get '/posts/:id', to: 'posts#show', as: 'post'
+  get '/search', to: 'search#search', as: 'search'
+  get '/search/action', to: 'search#action', as: 'searchaction'
+  get '/search/posts/:query', to: 'search#posts', as: 'searchposts'
+  get '/search/post/:post_id', to: 'search#post', as: 'searchpost'
+  get '/search/users/:query', to: 'search#users', as: 'searchusers'
+  get '/search/user/:user_id', to: 'search#user', as: 'searchuser'
+  get '/search/categories/:query', to: 'search#categories', as: 'searchcategories'
+  get '/search/category/:category_id', to: 'search#category', as: 'searchcategory'
+
+
 
   resources :categories do
     get '/posts', to: 'categories#posts'

@@ -27,7 +27,7 @@ var like = function(e, ele) {
     success: function(data) {
       if (data != "false") {
         $("#like-count").text(data);
-        if($('.liked').length == 0) {
+        if ($('.liked').length == 0) {
           $(".like").after('<small><span class="liked glyphicon glyphicon-ok"></span><span class="liked">Liked</span></small>');
         }
       } else {
@@ -113,6 +113,23 @@ $(document).on('ready turbolinks:load page:load', function() {
 var mdloaded = false;
 
 $(document).on('turbolinks:load', function() {
+
+  window.searchResults = null;
+
+  $('#searchbar').autocomplete({
+    serviceUrl: '/search',
+    groupBy: 'category',
+    paramName: 'query',
+    params: {'format': 'json'},
+    minChars: 3,
+    noCache: false,
+    maxHeight: 500,
+    tabDisabled: true,
+    onSelect: function(suggestion) {
+      window.location.href = "/search/action?query=" + suggestion.name;
+    }
+  });
+
 
   $('.post-body p').has('img').css('text-indent', 0);
 
