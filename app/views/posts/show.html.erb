@@ -73,7 +73,7 @@ Edit
   <div class="col-md-12 col-xs-12">
     <div class="fixed socialButtons">
       <strong>Share this post</strong>
-      <%= social_share_button_tag(@post.title, :allow_sites => %w(twitter facebook google_plus email tumblr), 'data-twitter-title' => truncate(@post.title, length: 50), :desc => truncate(@post.title, length: 50), :image => @post.cover_picture, :'data-type' => 'photo', :url => post_path(@post), :via => "arun_k350" %>
+      <%= social_share_button_tag(@post.title, :allow_sites => %w(twitter facebook google_plus email tumblr), 'data-twitter-title' => truncate(@post.title, length: 50), :desc => truncate(@post.title, length: 50), :image => @post.cover_picture, :'data-type' => 'photo', :url => post_path(@post), :via => "arun_k350") %>
     </div>
   </div>
 </div>
