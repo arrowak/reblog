@@ -1,6 +1,5 @@
 
 /* make sidebar nav vertical */
-@media (min-width: 768px) {
   .sidebar-nav .navbar .navbar-collapse {
     max-height : none;
     padding    : 0;
@@ -23,8 +22,8 @@
 
   .sidebar-nav .navbar-nav, .sidebar-nav .navbar-header{
     display: block; width: 100%;
+    margin: 0px !important;
   }
-}
 
 .page-header{
   h2{
