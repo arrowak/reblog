@@ -85,7 +85,7 @@ Edit
 
         <!-- Your share button code -->
         <div class="fb-share-button"
-          data-href="http://<%= request.host %>/<%= url_for(@post) %>"
+          data-href="http://<%= request.host %><%= url_for(@post) %>"
           data-layout="button_count" data-size="large">
           <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= URI.encode("http://" + request.host + url_for(@post)) %>&src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
         </div>
