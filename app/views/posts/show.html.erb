@@ -1,3 +1,11 @@
+<head>
+    <meta property="og:url"           content="http://<%= request.host %>/<%= url_for(@post) %>" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Reblog - <%= @post.title %>" />
+    <meta property="og:description"   content="<%= truncate(@post.body, :length => 50) %>" />
+    <meta property="og:image"         content="<%= @post.cover_picture %>" />
+</head>
+
 <% if @post.user == current_user %>
 <%= link_to user_posts_path(@user), class: 'btn btn-default' do %>
 <span class="glyphicon glyphicon-list-alt"></span>
@@ -72,8 +80,23 @@ Edit
 <div class="row">
   <div class="col-md-12 col-xs-12">
     <div class="fixed socialButtons">
-      <strong>Share this post</strong>
-      <%= social_share_button_tag(@post.title, :allow_sites => %w(twitter facebook google_plus email tumblr), 'data-facebook-title' => truncate(@post.title, length: 50), :desc => truncate(@post.title, length: 50), :image => @post.cover_picture, :'data-type' => 'photo', 'data-href' => "http://www.reblog.in/posts/2", 'data-href' => "http://www.reblog.in/posts/2") %>
+      <strong>Share this post</strong> <br><br>
+      <!-- <%= social_share_button_tag(@post.title, :allow_sites => %w(twitter facebook google_plus email tumblr), 'data-facebook-title' => truncate(@post.title, length: 50), :desc => truncate(@post.title, length: 50), :image => @post.cover_picture, :'data-type' => 'photo', 'data-href' => "http://www.reblog.in/posts/2", 'data-href' => "http://www.reblog.in/posts/2") %> -->
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.0&appId=101361256640648&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+        <!-- Your share button code -->
+        <div class="fb-share-button"
+          data-href="http://<%= request.host %>/<%= url_for(@post) %>"
+          data-layout="button_count" data-size="large">
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= URI.encode("http://" + request.host + "/" + url_for(@post)) %>&src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+        </div>
     </div>
   </div>
 </div>
