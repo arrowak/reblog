@@ -7,9 +7,9 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     unless current_user
-      @posts = Post.paginate(:page => params[:page], :per_page => 1)
+      @posts = Post.paginate(:page => params[:page], :per_page => 10)
     end
-    @posts = Post.where(:user => @user).paginate(:page => params[:page], :per_page => 1)
+    @posts = Post.where(:user => @user).paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html { render "home/posts" }
     end

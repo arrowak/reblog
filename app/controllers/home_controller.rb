@@ -5,6 +5,6 @@ class HomeController < ApplicationController
   end
 
   def posts
-    @posts = Post.paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
+    @posts = Post.paginate(:page => params[:page], :per_page => 10).order("created_at DESC")
   end
 end
