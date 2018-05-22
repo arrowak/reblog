@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180426131803) do
+ActiveRecord::Schema.define(version: 20180522120155) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
     t.string "trackable_type"
@@ -92,6 +95,7 @@ ActiveRecord::Schema.define(version: 20180426131803) do
     t.integer "cover_picture_file_size"
     t.datetime "cover_picture_updated_at"
     t.integer "likees_count", default: 0
+    t.boolean "published", default: false
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
