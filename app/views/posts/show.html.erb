@@ -20,15 +20,17 @@ Edit
     </div>
     <div class="row">
       <div class="like-wrapper col-xs-6 col-md-6">
-        <% if current_user.likes?(@post) %>
-        <%= link_to("#", class: "like async disabled", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
-        <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
-        <% end %>
-        <small><span class="liked glyphicon glyphicon-ok"></span><span class="liked">Liked</span></small>
-        <% else %>
-        <%= link_to("#", class: "like async", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
-        <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
-        <% end %>
+        <% if user_signed_in? %>
+          <% if current_user.likes?(@post) %>
+          <%= link_to("#", class: "like async disabled", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+          <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
+          <% end %>
+          <small><span class="liked glyphicon glyphicon-ok"></span><span class="liked">Liked</span></small>
+          <% else %>
+          <%= link_to("#", class: "like async", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+          <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
+          <% end %>
+          <% end %>
         <% end %>
       </div>
       <div class="col-md-6 col-xs-6 author">
@@ -37,24 +39,26 @@ Edit
             - <%= @post.user.name %> <%= image_tag(@post.user.profile_picture, :class => "profile-picture") %>
           </div>
         <% end %>
-        <% if current_user != @user %>
-        <div class="row follow">
-          <% if current_user.follows?(@user) %>
-          <%= link_to("#", class: "btn btn-xs btn-danger", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
-          <span class="glyphicon glyphicon-minus"></span> un-follow
+        <% if user_signed_in? %>
+          <% if current_user != @user %>
+          <div class="row follow">
+            <% if current_user.follows?(@user) %>
+            <%= link_to("#", class: "btn btn-xs btn-danger", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
+            <span class="glyphicon glyphicon-minus"></span> un-follow
+            <% end %>
+            <%= link_to("#", class: "btn btn-xs btn-success hidden", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
+            <span class="glyphicon glyphicon-plus"></span> follow
+            <% end %>
+            <% else %>
+            <%= link_to("#", class: "btn btn-xs btn-danger hidden", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
+            <span class="glyphicon glyphicon-minus"></span> un-follow
+            <% end %>
+            <%= link_to("#", class: "btn btn-xs btn-success", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
+            <span class="glyphicon glyphicon-plus"></span> follow
+            <% end %>
+            <% end %>
+          </div>
           <% end %>
-          <%= link_to("#", class: "btn btn-xs btn-success hidden", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
-          <span class="glyphicon glyphicon-plus"></span> follow
-          <% end %>
-          <% else %>
-          <%= link_to("#", class: "btn btn-xs btn-danger hidden", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
-          <span class="glyphicon glyphicon-minus"></span> un-follow
-          <% end %>
-          <%= link_to("#", class: "btn btn-xs btn-success", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
-          <span class="glyphicon glyphicon-plus"></span> follow
-          <% end %>
-          <% end %>
-        </div>
         <% end %>
       </div>
     </div>
@@ -96,12 +100,14 @@ Edit
   <div class="page-header">
     <h4>Comments <sup><span class="badge"><%= @post.comments.count %></span></sup></h4>
   </div>
-  <div class="comment-form">
-    <%= form_for [@user, @post, Comment.new] do |f| %>
-    <%= f.text_area :body, placeholder: "Add a comment", :class => "form-control" %><br/>
-    <%= f.submit "Add Comment", :class => 'btn btn-default' %>
-    <% end %>
-  </div>
+  <% if user_signed_in? %>
+    <div class="comment-form">
+      <%= form_for [@user, @post, Comment.new] do |f| %>
+      <%= f.text_area :body, placeholder: "Add a comment", :class => "form-control" %><br/>
+      <%= f.submit "Add Comment", :class => 'btn btn-default' %>
+      <% end %>
+    </div>
+  <% end %>
   <div class="comments">
     <%= render @post.comments if @post.comments.any? %>
   </div>

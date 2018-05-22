@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <% if controller.controller_name == "posts" %>
+    <% if controller.controller_name == "posts" and controller.action_name == "show" %>
       <meta property="og:url"           content="http://<%= request.host %><%= url_for(@post) %>" />
       <meta property="og:type"          content="website" />
       <meta property="og:title"         content="Reblog - <%= @post.title %>" />
@@ -29,9 +29,7 @@
     <%= csrf_meta_tags %>
   </head>
   <body class="controller-<%= controller.controller_name %>-<%= controller.action_name %>">
-    <% if user_signed_in? %>
     <%= render 'layouts/nav' %>
-    <% end %>
     <div class="row main-wrapper">
       <div class="col-sm-2 col-md-2">
         <%= render 'layouts/left_nav' %>

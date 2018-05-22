@@ -11,7 +11,7 @@
   <%= l(comment.created_at, format: '%B, %d %Y %H:%M') %></p>
   <div class="comment-body"><%= comment.body %></div>
   <br>
-  <% if controller_name != "home" and controller_name != "comments" %>
+  <% if controller_name != "home" and controller_name != "comments" and user_signed_in? %>
     <%= form_for [@user, @post, comment, Comment.new] do |f| %>
       <%= f.text_area :body, placeholder: "Add a Reply", :class => "form-control", :required => true %><br/>
       <%= f.submit "Reply", class: "btn btn-default btn-xs" %>

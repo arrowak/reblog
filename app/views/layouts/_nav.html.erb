@@ -9,6 +9,7 @@
       </button>
       <a href="/" class="navbar-brand"><img src="<%= image_path("favicon.ico") %>" alt=""></a>
     </div>
+    <% if user_signed_in? %>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class=""><a href="/">Posts</a></li>
@@ -27,8 +28,17 @@
         </li>
       </ul>
     </div>
+    <% else %>
+    <div class="navbar-right">
+      <ul class="nav navbar-nav">
+        <li class=""><%= link_to("Login", new_user_session_path) %></li>
+      </ul>
+    </div>
+    <% end %>
   </div>
 </nav>
+
+<% if user_signed_in? %>
 <div class="col-md-2"></div>
 <div class="col-xs-12 col-md-9">
   <form class="searchbar-form">
@@ -40,3 +50,4 @@
     </div>
   </form>
 </div>
+<% end %>

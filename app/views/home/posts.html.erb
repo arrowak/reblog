@@ -8,7 +8,7 @@
       <span class="blur-text"> - <%= @context %> </span>
   <% end %>
   </h2>
-  <%= link_to("Create Post", new_user_post_path(current_user), :class => "btn btn-danger") %>
+  <%= link_to("Create Post", new_user_post_path(current_user), :class => "btn btn-danger") if current_user %>
 </div>
 
 <% if @posts.any? %>
@@ -51,6 +51,7 @@
       </div>
     <% end %>
   <% end %>
+  <%= will_paginate @posts %>
 <% else %>
   <h4 class="text-center blur-text">Whoops! Looks like there is nothing here.</h4>
 <% end %>
