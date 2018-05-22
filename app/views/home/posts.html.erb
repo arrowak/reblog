@@ -51,7 +51,9 @@
       </div>
     <% end %>
   <% end %>
-  <%= will_paginate @posts %>
+  <div class="flickr_pagination">
+    <%= will_paginate @posts %>
+  </div>
 <% else %>
   <h4 class="text-center blur-text">Whoops! Looks like there is nothing here.</h4>
 <% end %>
