@@ -35,6 +35,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = @user
+    @post.published = false
 
     respond_to do |format|
       if @post.save
