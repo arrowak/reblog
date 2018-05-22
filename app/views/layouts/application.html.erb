@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta property="og:url"           content="http://www.reblog.in/posts/2" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Reblog<%= " - " + @title if @title.present? %>" />
-    <meta property="og:description"   content="<%= truncate(@post.body, :length => 50) if @post.present? %>" />
-    <meta property="og:image"         content="<%= @post.cover_picture if @post.present? %>" />
+    <% if controller_name == "posts" %>
+      <meta property="og:url"           content="http://<%= request.host %><%= url_for(@post) %>" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="Reblog - <%= @post.title %>" />
+      <meta property="og:description"   content="<%= truncate(@post.body, :length => 50) %>" />
+      <meta property="og:image"         content="<%= @post.cover_picture %>" />
+    <% end %>
     <title>Reblog<%= " - " + @title if @title.present? %></title>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
