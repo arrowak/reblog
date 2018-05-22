@@ -21,44 +21,44 @@ Edit
     <div class="row">
       <div class="like-wrapper col-xs-6 col-md-6">
         <% if user_signed_in? %>
-          <% if current_user.likes?(@post) %>
-          <%= link_to("#", class: "like async disabled", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
-          <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
-          <% end %>
-          <small><span class="liked glyphicon glyphicon-ok"></span><span class="liked">Liked</span></small>
-          <% else %>
-          <%= link_to("#", class: "like async", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
-          <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
-          <% end %>
-          <% end %>
+        <% if current_user.likes?(@post) %>
+        <%= link_to("#", class: "like async disabled", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+        <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
+        <% end %>
+        <small><span class="liked glyphicon glyphicon-ok"></span><span class="liked">Liked</span></small>
+        <% else %>
+        <%= link_to("#", class: "like async", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+        <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
+        <% end %>
+        <% end %>
         <% end %>
       </div>
       <div class="col-md-6 col-xs-6 author">
         <%= link_to(user_path(@post.user), :class => "text-white") do %>
-          <div class="row">
-            - <%= @post.user.name %> <%= image_tag(@post.user.profile_picture, :class => "profile-picture") %>
-          </div>
+        <div class="row">
+          - <%= @post.user.name %> <%= image_tag(@post.user.profile_picture, :class => "profile-picture") %>
+        </div>
         <% end %>
         <% if user_signed_in? %>
-          <% if current_user != @user %>
-          <div class="row follow">
-            <% if current_user.follows?(@user) %>
-            <%= link_to("#", class: "btn btn-xs btn-danger", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
-            <span class="glyphicon glyphicon-minus"></span> un-follow
-            <% end %>
-            <%= link_to("#", class: "btn btn-xs btn-success hidden", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
-            <span class="glyphicon glyphicon-plus"></span> follow
-            <% end %>
-            <% else %>
-            <%= link_to("#", class: "btn btn-xs btn-danger hidden", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
-            <span class="glyphicon glyphicon-minus"></span> un-follow
-            <% end %>
-            <%= link_to("#", class: "btn btn-xs btn-success", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
-            <span class="glyphicon glyphicon-plus"></span> follow
-            <% end %>
-            <% end %>
-          </div>
+        <% if current_user != @user %>
+        <div class="row follow">
+          <% if current_user.follows?(@user) %>
+          <%= link_to("#", class: "btn btn-xs btn-danger", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
+          <span class="glyphicon glyphicon-minus"></span> un-follow
           <% end %>
+          <%= link_to("#", class: "btn btn-xs btn-success hidden", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
+          <span class="glyphicon glyphicon-plus"></span> follow
+          <% end %>
+          <% else %>
+          <%= link_to("#", class: "btn btn-xs btn-danger hidden", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
+          <span class="glyphicon glyphicon-minus"></span> un-follow
+          <% end %>
+          <%= link_to("#", class: "btn btn-xs btn-success", id: "follow", "data-link" => user_follow_path(@user), onclick: "javascript:follow(event, this)") do %>
+          <span class="glyphicon glyphicon-plus"></span> follow
+          <% end %>
+          <% end %>
+        </div>
+        <% end %>
         <% end %>
       </div>
     </div>
@@ -78,21 +78,16 @@ Edit
     <div class="fixed socialButtons">
       <strong>Share this post</strong> <br><br>
       <!-- <%= social_share_button_tag(@post.title, :allow_sites => %w(twitter facebook google_plus email tumblr), 'data-facebook-title' => truncate(@post.title, length: 50), :desc => truncate(@post.title, length: 50), :image => @post.cover_picture, :'data-type' => 'photo', 'data-href' => "http://www.reblog.in/posts/2", 'data-href' => "http://www.reblog.in/posts/2") %> -->
-      <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.0&appId=101361256640648&autoLogAppEvents=1';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-        <!-- Your share button code -->
-        <div class="fb-share-button"
+      <div class="row">
+        <!-- Facebook Share Button -->
+        <div class="fb-share-button share-button"
           data-href="http://<%= request.host %><%= url_for(@post) %>"
           data-layout="button_count" data-size="large">
           <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= URI.encode("http://" + request.host + url_for(@post)) %>&src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
         </div>
+        <!-- Twitter Share Button -->
+        <a href="https://twitter.com/intent/tweet?text=<%= @post.title %>&url=<%= URI.encode("http://" + request.host + url_for(@post)) %>&hashtags=<%= @post.tags %>" class="twitter-share-button share-button" data-size="large" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
     </div>
   </div>
 </div>
@@ -101,12 +96,12 @@ Edit
     <h4>Comments <sup><span class="badge"><%= @post.comments.count %></span></sup></h4>
   </div>
   <% if user_signed_in? %>
-    <div class="comment-form">
-      <%= form_for [@user, @post, Comment.new] do |f| %>
-      <%= f.text_area :body, placeholder: "Add a comment", :class => "form-control" %><br/>
-      <%= f.submit "Add Comment", :class => 'btn btn-default' %>
-      <% end %>
-    </div>
+  <div class="comment-form">
+    <%= form_for [@user, @post, Comment.new] do |f| %>
+    <%= f.text_area :body, placeholder: "Add a comment", :class => "form-control" %><br/>
+    <%= f.submit "Add Comment", :class => 'btn btn-default' %>
+    <% end %>
+  </div>
   <% end %>
   <div class="comments">
     <%= render @post.comments if @post.comments.any? %>

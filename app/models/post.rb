@@ -7,4 +7,8 @@ class Post < ApplicationRecord
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
   acts_as_likeable
+
+  def get_tags
+    tags.split(',')
+  end
 end

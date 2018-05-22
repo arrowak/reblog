@@ -13,6 +13,14 @@ body.controller-posts-show, body.controller-search-post{
     }
   }
 
+  .socialButtons{
+    .share-button, .twitter-share-button, .fb-share-button{
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+
+
   .post-header{
     height  : 300px;
     padding : 15px;
