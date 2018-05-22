@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <% if controller_name == "posts" %>
+    <% if controller.controller_name == "posts" %>
       <meta property="og:url"           content="http://<%= request.host %><%= url_for(@post) %>" />
       <meta property="og:type"          content="website" />
       <meta property="og:title"         content="Reblog - <%= @post.title %>" />
