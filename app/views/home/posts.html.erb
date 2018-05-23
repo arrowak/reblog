@@ -46,7 +46,7 @@
         <div class="card-actions">
           <div class="action">
             <div class="activity-time blur-text">
-              <% if current_user == @user %>
+              <% if user_signed_in? and current_user == @user %>
                 <% if post.published? %>
                   <span class="is_published label label-success">Published</span>
                 <% else %>
