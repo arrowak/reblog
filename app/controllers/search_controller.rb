@@ -4,7 +4,7 @@ class SearchController < ApplicationController
   def search
     query = params[:query]
 
-    users = User.where('first_name ILIKE ?', "%#{query}%").limit(5) or nil
+    users = User.where('concat_ws(\' \', first_name, last_name) ILIKE ?', "%#{query}%").limit(5) or nil
 
     posts = Post.where('title ILIKE ?', "%#{query}%").limit(5) or nil
 
