@@ -51,3 +51,9 @@
     <% end %>
   </ul>
 </div>
+
+<% if @users.any? %>
+  <div class="flickr_pagination">
+    <%= will_paginate @users %>
+  </div>
+<% end %>

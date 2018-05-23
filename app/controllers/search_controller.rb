@@ -92,7 +92,7 @@ class SearchController < ApplicationController
 
   def posts
     query = params[:query]
-    @posts = Post.where('title ILIKE ?', "%#{query}%")
+    @posts = Post.where('title ILIKE ?', "%#{query}%").paginate(:page => params[:page], :per_page => 10)
     @context = "[ Search: '" + query + "' ]"
     respond_to do |format|
       format.html { render 'home/posts' }
@@ -112,7 +112,7 @@ class SearchController < ApplicationController
 
   def users
     query = params[:query]
-    @users = User.where('first_name ILIKE ?', "%#{query}%")
+    @users = User.where('first_name ILIKE ?', "%#{query}%").paginate(:page => params[:page], :per_page => 10)
     @header = "Users - [ Search: '" + query + "' ]"
     respond_to do |format|
       format.html { render 'users/index' }

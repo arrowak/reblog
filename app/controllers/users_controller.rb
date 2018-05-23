@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :follow_user, :unfollow_user, :followers, :following]
   before_action :authenticate_user!
+  require 'will_paginate/array'
 
   # GET /users
   # GET /users.json
@@ -81,7 +82,7 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @users = @user.followers(User)
+    @users = @user.followers(User).paginate(:page => params[:page], :per_page => 10)
     @header = "Followers"
     respond_to do |format|
       format.html { render 'index' }
@@ -89,7 +90,7 @@ class UsersController < ApplicationController
   end
 
   def following
-    @users = @user.followees(User)
+    @users = @user.followees(User).paginate(:page => params[:page], :per_page => 10)
     @header = "Following"
     respond_to do |format|
       format.html { render 'index' }
