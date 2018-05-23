@@ -90,7 +90,6 @@ var unfollow = function(e, ele) {
   return true;
 };
 
-
 $(document).on('ready turbolinks:load page:load', function() {
   $.ajaxSetup({
     headers: {

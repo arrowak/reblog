@@ -31,6 +31,10 @@
   }
 }
 
+.action {
+  margin: 0px 5px;
+}
+
 body{
   background-color : #F5F4F2 !important;
 
@@ -105,6 +109,10 @@ form{
 
 img {
   max-width : 100%;
+}
+
+.hidden{
+  display: none !important;
 }
 
 .text-right{

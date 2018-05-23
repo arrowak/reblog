@@ -16,7 +16,7 @@
           <% categories.each do |category| %>
             <li>
               <%= link_to(category_posts_path(category)) do %>
-                <%= category.name %> <span class="badge pull-right"><%= category.posts.count %></span>
+                <%= category.name %> <span class="badge pull-right"><%= category.posts.where(:published => true).count %></span>
               <% end %>
             </li>
           <% end %>

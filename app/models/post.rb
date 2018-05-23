@@ -11,4 +11,8 @@ class Post < ApplicationRecord
   def get_tags
     tags.split(',')
   end
+
+  def published?
+    published
+  end
 end

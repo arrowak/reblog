@@ -13,6 +13,11 @@ body.controller-home-posts, body.controller-posts-index, body.controller-categor
       }
     }
   }
+
+  .is_published{
+    margin: 0px 10px;
+  }
+
   .card{
     width         : 100%;
     padding       : 20px 10px;

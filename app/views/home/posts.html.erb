@@ -45,15 +45,31 @@
         <% end %>
         <div class="card-actions">
           <div class="action">
-            <div class="activity-time blur-text"> <%= post.likers(User).count %> likes | <%= post.comments.count %> comments | created <%= time_ago_in_words(post.created_at) %> ago</div>
+            <div class="activity-time blur-text">
+              <% if current_user == @user %>
+                <% if post.published? %>
+                  <span class="is_published label label-success">Published</span>
+                <% else %>
+                  <span class="is_published label label-danger">Un-published</span>
+                <% end %>
+
+              <% else %>
+
+              <% end %>
+
+              <%= post.likers(User).count %> likes | <%= post.comments.count %> comments | created <%= time_ago_in_words(post.created_at) %> ago
+            </div>
           </div>
         </div>
       </div>
     <% end %>
   <% end %>
-  <div class="flickr_pagination">
-    <%= will_paginate @posts %>
-  </div>
+  <% if @posts.any? %>
+    <div class="flickr_pagination">
+      <%= will_paginate @posts %>
+    </div>
+  <% end %>
+
 <% else %>
   <h4 class="text-center blur-text">Whoops! Looks like there is nothing here.</h4>
 <% end %>

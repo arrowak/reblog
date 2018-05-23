@@ -1,15 +1,16 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :like]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :publish, :unpublish]
   before_action :set_user
 
 
   # GET /posts
   # GET /posts.json
   def index
-    unless current_user
-      @posts = Post.paginate(:page => params[:page], :per_page => 10)
+    unless current_user == @user
+      @posts = Post.where(:published => true).paginate(:page => params[:page], :per_page => 10)
+    else
+      @posts = Post.where(:user => @user).paginate(:page => params[:page], :per_page => 10)
     end
-    @posts = Post.where(:user => @user).paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html { render "home/posts" }
     end
@@ -87,6 +88,26 @@ class PostsController < ApplicationController
     @context = "[ Search: '" + query + "' ]"
     respond_to do |format|
       format.html { render 'home/posts' }
+    end
+  end
+
+  def publish
+    respond_to do |format|
+      if @post.update(:published => true)
+        format.html { redirect_to user_post_path(@user, @post), :flash => { notice: 'Post was successfully published.' } }
+      else
+        format.html { redirect_to user_post_path(@user, @post), :flash => { error: 'Oops! There seems to be some issue in publishing. Please try after sometime.' } }
+      end
+    end
+  end
+
+  def unpublish
+    respond_to do |format|
+      if @post.update(:published => false)
+        format.html { redirect_to user_post_path(@user, @post), :flash => { notice: 'Post was successfully un-published.' } }
+      else
+        format.html { redirect_to user_post_path(@user, @post), :flash => { error: 'Oops! There seems to be some issue in un-publishing. Please try after sometime.' } }
+      end
     end
   end
 

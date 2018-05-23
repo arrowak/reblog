@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     get '/following', to: 'users#following', as: 'following'
     resources :posts do
       get '/like', to: 'posts#like'
+      get '/publish', to: 'posts#publish'
+      get '/unpublish', to: 'posts#unpublish'
       resources :comments do
         resources :comments
       end
