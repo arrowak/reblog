@@ -1,5 +1,5 @@
 
-body.controller-posts-show, body.controller-search-post{
+body.controller-posts-show, body.controller-search-post, body.controller-posts-edit{
   $size : 35px;
 
   .social-share-button {
@@ -22,12 +22,14 @@ body.controller-posts-show, body.controller-search-post{
 
 
   .post-header{
-    height  : 300px;
+    height  : 400px;
     padding : 15px;
 
     color   : #eee;
 
     .post-title{
+      position: absolute;
+      width: 98%;
       bottom : 15px;
     }
 
@@ -54,16 +56,14 @@ body.controller-posts-show, body.controller-search-post{
       color       : #3E8E30;
     }
 
-    .hidden{
-      display : none;
-    }
   }
 
-  .post-body{
+  .post-body, #md-preview{
     margin    : 0px auto;
     font-size : +1.2em !important;
     text-align: justify;
     word-wrap: break-word;
+    color: rgba(0,0,0,0.6);
 
     img{
       margin : 0px auto;
@@ -72,6 +72,45 @@ body.controller-posts-show, body.controller-search-post{
     p{
       text-indent: 50px;
       margin-top: 25px;
+    }
+
+    h1{
+      color: #65BCE9;
+      border-left: 7px solid #F5806B;
+      padding-left: 15px;
+      font-size: 26px;
+    }
+
+    h2{
+      color: #F5806B;
+      font-size: 22px;
+    }
+
+    h3{
+      color: #F5806B;
+      font-style: italic;
+      font-size: 18px;
+    }
+
+    table{
+      margin: 0px 10px;
+
+      th, td{
+        border: 1px solid rgba(0,0,0,0.1);
+      }
+
+      th{
+        padding: 15px;
+        background: #40A5DA;
+        color: #fff;
+      }
+
+      td {
+        padding: 5px;
+        text-align: left;
+        background: rgba(200,200,200,0.05);
+      }
+
     }
   }
 
