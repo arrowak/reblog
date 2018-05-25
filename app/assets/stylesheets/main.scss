@@ -111,6 +111,10 @@ img {
   max-width : 100%;
 }
 
+.btn{
+  border-radius: 2px !important;
+}
+
 .hidden{
   display: none !important;
 }
@@ -129,6 +133,10 @@ img {
     color           : #bbb;
     text-decoration : none;
   }
+}
+
+.row {
+  margin: 0px;
 }
 
 .vertical-center{
