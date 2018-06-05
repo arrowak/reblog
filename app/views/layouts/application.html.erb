@@ -10,7 +10,8 @@
       <meta property="og:url"           content="http://<%= request.host %><%= url_for(@post) %>" />
       <meta property="og:type"          content="website" />
       <meta property="og:title"         content="Reblog - <%= @post.title %>" />
-      <meta property="og:description"   content="<%= truncate(strip_tags(@post.body), :length => 50) %>" />
+      <% post_body = @post.body.gsub(/<\/?[^>]*>/, "") %>
+      <meta property="og:description"   content="<%= truncate(post_body, :length => 50) %>" />
       <meta property="og:image"         content="<%= @post.cover_picture %>" />
     <% end %>
     <title>Reblog<%= " - " + @title if @title.present? %></title>
