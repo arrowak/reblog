@@ -94,6 +94,7 @@ class PostsController < ApplicationController
   def publish
     respond_to do |format|
       if @post.update(:published => true)
+        @post.create_activity :publish
         format.html { redirect_to user_post_path(@user, @post), :flash => { notice: 'Post was successfully published.' } }
       else
         format.html { redirect_to user_post_path(@user, @post), :flash => { error: 'Oops! There seems to be some issue in publishing. Please try after sometime.' } }
