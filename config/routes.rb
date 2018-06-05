@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'contact', to: 'contacts#index'
+
   root to: 'home#posts'
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   get '/posts', to: 'home#posts'
