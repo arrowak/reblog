@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'contact', to: 'contacts#index'
+  get '/contact', to: 'contacts#index'
+  get '/termsandconditions', to: 'contacts#terms', as: 'termsandconditions'
 
   root to: 'home#posts'
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
