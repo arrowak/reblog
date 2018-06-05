@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     unless current_user == @user
-      @posts = Post.where(:published => true).paginate(:page => params[:page], :per_page => 10)
+      @posts = Post.where(:published => true, :user => @user).paginate(:page => params[:page], :per_page => 10)
     else
       @posts = Post.where(:user => @user).paginate(:page => params[:page], :per_page => 10)
     end
