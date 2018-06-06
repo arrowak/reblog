@@ -90,11 +90,15 @@ Edit
       <strong>Share this post</strong> <br><br>
       <div class="row">
         <!-- Facebook Share Button -->
-        <div class="fb-share-button share-button"
+        <!-- <div class="fb-share-button share-button"
           data-href="http://<%= request.host %><%= url_for(@post) %>"
           data-layout="button_count" data-size="large">
           <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= URI.encode("http://" + request.host + url_for(@post)) %>&src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
-        </div>
+        </div> -->
+
+        <%= image_tag("fbshare.png", :onclick => "javascript: shareToFB('http://#{request.host}#{url_for(@post)}');", :id => "b-share-button", :class => "fb-share-button", :alt => "Share On Facebook", :title => "Share On Facebook") %>
+
+
         <!-- Twitter Share Button -->
         <a href="https://twitter.com/intent/tweet?text=<%= @post.title %>&url=<%= URI.encode("http://" + request.host + url_for(@post)) %>&hashtags=<%= @post.tags %>" class="twitter-share-button share-button" data-size="large" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>

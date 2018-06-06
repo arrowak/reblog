@@ -90,6 +90,21 @@ var unfollow = function(e, ele) {
   return true;
 };
 
+var shareToFB = function(href){
+  FB.init({
+    appId: '101361256640648',
+    status: true,
+    cookie: true,
+    xfbml: true
+  });
+
+  FB.ui({
+    method: 'share',
+    mobile_iframe: true,
+    href: href,
+  }, function(response){});
+};
+
 $(document).on('ready turbolinks:load page:load', function() {
   $.ajaxSetup({
     headers: {
@@ -108,20 +123,29 @@ $(document).on('ready turbolinks:load page:load', function() {
     $('#' + location.hash.substr(1)).removeClass("blinkBackground");
   }, 4000);
 
-  // $("a[href='#top']").click(function() {
-  //   $("html, body").animate({
-  //     scrollTop: 0
-  //   }, "slow");
-  //   return false;
-  // });
+  $("a[href='#top']").click(function() {
+    $("html, body").animate({
+      scrollTop: 0
+    }, "slow");
+    return false;
+  });
 
-  // $(document).scroll(function() {
-  //   if (document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) {
-  //     $('#scroll-top').show();
-  //   } else {
-  //     $('#scroll-top').hide();
-  //   }
-  // });
+  $(document).scroll(function() {
+    if (document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) {
+      $('#scroll-top').show();
+    } else {
+      $('#scroll-top').hide();
+    }
+  });
+
+  // (function(d, s, id) {
+  //     var js, fjs = d.getElementsByTagName(s)[0];
+  //     if (d.getElementById(id)) return;
+  //     js = d.createElement(s); js.id = id;
+  //     js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.0&appId=101361256640648&autoLogAppEvents=1';
+  //     fjs.parentNode.insertBefore(js, fjs);
+  //     }(document, 'script', 'facebook-jssdk'));
+  //
 
 });
 
