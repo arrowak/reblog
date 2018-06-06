@@ -96,7 +96,7 @@ Edit
           <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= URI.encode("http://" + request.host + url_for(@post)) %>&src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
         </div> -->
 
-        <%= image_tag("fbshare.png", :onclick => "javascript: shareToFB('http://#{request.host}#{url_for(@post)}');", :id => "b-share-button", :class => "fb-share-button", :alt => "Share On Facebook", :title => "Share On Facebook") %>
+        <%= image_tag("fbshare.png", :onclick => "javascript: shareToFB('http://#{request.host}#{url_for(@post)}');", :id => "b-share-button", :class => "fb-share-button share-button", :alt => "Share On Facebook", :title => "Share On Facebook") %>
 
 
         <!-- Twitter Share Button -->

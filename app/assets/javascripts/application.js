@@ -92,7 +92,7 @@ var unfollow = function(e, ele) {
 
 var shareToFB = function(href){
   FB.init({
-    appId: '101361256640648',
+    appId: '814967478698676',
     status: true,
     cookie: true,
     xfbml: true
