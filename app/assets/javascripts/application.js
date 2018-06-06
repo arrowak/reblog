@@ -103,9 +103,25 @@ $(document).on('ready turbolinks:load page:load', function() {
 
 
   $('#' + location.hash.substr(1)).addClass("blinkBackground blink");
+
   setTimeout(function() {
     $('#' + location.hash.substr(1)).removeClass("blinkBackground");
   }, 4000);
+
+  $("a[href='#top']").click(function() {
+    $("html, body").animate({
+      scrollTop: 0
+    }, "slow");
+    return false;
+  });
+
+  $(document).scroll(function() {
+    if (document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) {
+      $('#scroll-top').show();
+    } else {
+      $('#scroll-top').hide();
+    }
+  });
 
 });
 
@@ -119,7 +135,9 @@ $(document).on('turbolinks:load', function() {
     serviceUrl: '/search',
     groupBy: 'category',
     paramName: 'query',
-    params: {'format': 'json'},
+    params: {
+      'format': 'json'
+    },
     minChars: 3,
     noCache: false,
     maxHeight: 500,

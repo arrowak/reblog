@@ -1,7 +1,6 @@
 
 body.controller-home-posts, body.controller-posts-index, body.controller-categories-posts, body.controller-search-posts, body.controller-search-category{
   a:not(.btn){
-    color : #000;
     &:hover{
       text-decoration : none;
 
@@ -12,10 +11,14 @@ body.controller-home-posts, body.controller-posts-index, body.controller-categor
         text-decoration : underline;
       }
     }
+
+    &:not(.blur-text) {
+      color : #000;
+    }
   }
 
   .is_published{
-    margin: 0px 10px;
+    margin : 0px 10px;
   }
 
   .card{
