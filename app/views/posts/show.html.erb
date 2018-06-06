@@ -110,6 +110,12 @@ Edit
     <%= f.submit "Add Comment", :class => 'btn btn-default' %>
     <% end %>
   </div>
+  <% else %>
+  <div class="row">
+    <div class="col-xs-1 col-md-2"></div>
+    <div class="col-xs-10 col-md-8"><strong><%= link_to("Login", new_user_session_path) %></strong> to Like and Comment.</div>
+    <div class="col-xs-1 col-md-2"></div>
+  </div>
   <% end %>
   <div class="comments">
     <%= render @post.comments if @post.comments.any? %>
