@@ -17,6 +17,13 @@
       <meta name="author" content="<%= @post.user.name %>">
     <% end %>
     <title>Reblog<%= " - " + @title if @title.present? %></title>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3343345464304021",
+        enable_page_level_ads: true
+      });
+    </script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <%= javascript_include_tag "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", "https://oss.maxcdn.com/respond/1.4.2/respond.min.js" %>
@@ -39,7 +46,7 @@
       <div class="col-sm-2 col-md-2">
         <%= render 'layouts/left_nav' %>
       </div>
-      <div class="col-sm-9 col-md-9 content">
+      <div class="col-sm-8 col-md-8 content">
         <% flash.each do |name, msg| %>
         <% print name %>
         <%= content_tag :div, class: "alert alert-#{ name == "error" ? "danger" : "success" } alert-dismissable", role: "alert" do %>
