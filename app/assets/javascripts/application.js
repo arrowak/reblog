@@ -157,6 +157,7 @@ $(document).on('turbolinks:load', function() {
     noCache: false,
     maxHeight: 500,
     tabDisabled: true,
+    triggerSelectOnValidInput: false,
     onSelect: function(suggestion) {
       window.location.href = "/search/action?query=" + suggestion.name;
     }
