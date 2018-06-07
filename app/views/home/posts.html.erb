@@ -1,14 +1,18 @@
-<div class="page-header">
-  <h2>
-  <% if controller_name == "home" %>
-      Recent
-  <% end %>
-  Posts
-  <% if @context.present? %>
-      <span class="blur-text"> - <%= @context %> </span>
-  <% end %>
-  </h2>
-  <%= link_to("Create Post", new_user_post_path(current_user), :class => "btn btn-danger") if current_user %>
+<div class="page-header row">
+  <div class="col-xs-12 col-md-10 no-padding">
+    <h2>
+    <% if controller_name == "home" %>
+        Recent
+    <% end %>
+    Posts
+    <% if @context.present? %>
+        <span class="blur-text"> - <%= @context %> </span>
+    <% end %>
+    </h2>
+  </div>
+  <div class="col-xs-12 col-md-2 text-right no-padding">
+    <%= link_to("Create Post", new_user_post_path(current_user), :class => "btn btn-danger") if current_user %>
+  </div>
 </div>
 
 <% if @posts.any? %>
