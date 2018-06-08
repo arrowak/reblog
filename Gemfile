@@ -36,15 +36,11 @@ gem 'cancan'
 
 gem 'public_activity'
 
-gem 'redcarpet'
-
 gem 'jquery-rails'
 
 gem 'omniauth-google-oauth2'
 
 gem 'dotenv-rails', groups: [:development, :test]
-
-gem 'md_simple_editor'
 
 gem 'paperclip', '~> 6.0.0'
 
@@ -57,6 +53,8 @@ gem 'social-share-button'
 gem 'rails_12factor'
 
 gem 'will_paginate', '~> 3.1.0'
+
+gem 'summernote-rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

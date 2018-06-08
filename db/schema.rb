@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180522120155) do
+ActiveRecord::Schema.define(version: 20180608165720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 20180522120155) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cloudshares", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -80,6 +89,17 @@ ActiveRecord::Schema.define(version: 20180522120155) do
     t.datetime "created_at"
     t.index ["mentionable_id", "mentionable_type"], name: "fk_mentionables"
     t.index ["mentioner_id", "mentioner_type"], name: "fk_mentions"
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["post_id"], name: "index_pictures_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -129,6 +149,7 @@ ActiveRecord::Schema.define(version: 20180522120155) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "pictures", "posts"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
 end

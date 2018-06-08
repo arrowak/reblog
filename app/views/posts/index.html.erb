@@ -7,8 +7,7 @@
 <div class="card">
   <div class="card-body" style="background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url(<%= post.cover_picture %>) no-repeat center; background-size:cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;">
     <div class="card-title"><%= post.title %></div>
-    <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
-    <p class="card-text"><%= truncate(strip_tags(markdown.render(post.body)), length: 300) %></p>
+    <p class="card-text"><%= truncate(strip_tags(post.body), length: 300) %></p>
     <div class="card-tags">
       <% post.tags.split(',').each do |tag| %>
         <span class="label label-default"><%= tag %></span>

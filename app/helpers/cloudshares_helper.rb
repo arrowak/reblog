@@ -1,0 +1,2 @@
+module CloudsharesHelper
+end

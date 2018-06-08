@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get '/contact', to: 'contacts#index'
   get '/termsandconditions', to: 'contacts#terms', as: 'termsandconditions'
 
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   get '/search/user/:user_id', to: 'search#user', as: 'searchuser'
   get '/search/categories/:query', to: 'search#categories', as: 'searchcategories'
   get '/search/category/:category_id', to: 'search#category', as: 'searchcategory'
-
+  post '/upload_image', to: 'cloudshares#create'
 
 
   resources :categories do
