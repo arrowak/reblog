@@ -1,23 +1,25 @@
 <% if @post.user == current_user %>
-<%= link_to user_posts_path(@user), class: 'btn btn-default action' do %>
-<span class="glyphicon glyphicon-list-alt"></span>
-My Posts
-<% end %>
-<%= link_to edit_user_post_path(@user, @post), class: 'btn btn-primary action' do %>
-<span class="glyphicon glyphicon-pencil"></span>
-Edit
-<% end %>
-<% if @post.published? %>
-    <%= link_to user_post_unpublish_path(@user, @post), class: 'btn btn-danger action', :id => "unpulish_post" do %>
-    <span class="glyphicon glyphicon-globe"></span>
-    Un-publish
-    <% end %>
-<% else %>
-    <%= link_to user_post_publish_path(@user, @post), class: 'btn btn-success action', :id => "publish_post" do %>
-    <span class="glyphicon glyphicon-globe"></span>
-    Publish
-    <% end %>
-<% end %>
+<div class="text-right">
+  <%= link_to user_posts_path(@user), class: 'btn btn-default action' do %>
+  <span class="glyphicon glyphicon-list-alt"></span>
+  My Posts
+  <% end %>
+  <%= link_to edit_user_post_path(@user, @post), class: 'btn btn-primary action' do %>
+  <span class="glyphicon glyphicon-pencil"></span>
+  Edit
+  <% end %>
+  <% if @post.published? %>
+      <%= link_to user_post_unpublish_path(@user, @post), class: 'btn btn-danger action', :id => "unpulish_post" do %>
+      <span class="glyphicon glyphicon-globe"></span>
+      Un-publish
+      <% end %>
+  <% else %>
+      <%= link_to user_post_publish_path(@user, @post), class: 'btn btn-success action', :id => "publish_post" do %>
+      <span class="glyphicon glyphicon-globe"></span>
+      Publish
+      <% end %>
+  <% end %>
+</div>
 <% end %>
 <div class="page-header post-header row" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)), url(<%= @post.cover_picture %>) no-repeat center; background-size:cover; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; position:relative;">
   <div class="post-title col-xs-12 col-md-12">
@@ -31,18 +33,7 @@ Edit
     </div>
     <div class="row">
       <div class="like-wrapper col-xs-6 col-md-6">
-        <% if user_signed_in? %>
-        <% if current_user.likes?(@post) %>
-        <%= link_to("#", class: "like async disabled", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
-        <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
-        <% end %>
-        <small><span class="liked glyphicon glyphicon-ok"></span><span class="liked">Liked</span></small>
-        <% else %>
-        <%= link_to("#", class: "like async", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
-        <span class="glyphicon glyphicon-thumbs-up" style="font-size: 25px; vertical-align: middle;margin-right: 5px;"></span> <sup><span id="like-count" class="badge badge-success like-count"><%= @post.likers(User).count %></span></sup>
-        <% end %>
-        <% end %>
-        <% end %>
+
       </div>
       <div class="col-md-6 col-xs-6 author">
         <%= link_to(user_path(@post.user), :class => "text-white") do %>
@@ -52,7 +43,7 @@ Edit
         <% end %>
         <% if user_signed_in? %>
         <% if current_user != @user %>
-        <div class="row follow">
+        <div class="row follow text-right">
           <% if current_user.follows?(@user) %>
           <%= link_to("#", class: "btn btn-xs btn-danger", id: "un-follow", "data-link" => user_unfollow_path(@user), onclick: "javascript:unfollow(event, this)") do %>
           <span class="glyphicon glyphicon-minus"></span> un-follow
@@ -77,9 +68,8 @@ Edit
 </div>
 <div class="row">
   <div class="col-xs-1 col-md-1"></div>
-  <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
   <div class="post-body col-xs-10 col-md-10">
-    <p><%= raw(markdown.render(@post.body)) %></p>
+    <p><%= raw(@post.body) %></p>
   </div>
   <div class="col-xs-1 col-md-1"></div>
 </div>
@@ -89,12 +79,29 @@ Edit
     <div class="fixed socialButtons">
       <strong>Share this post</strong> <br><br>
       <div class="row">
+
         <!-- Facebook Share Button -->
-        <%= image_tag("fbshare.png", :onclick => "javascript: shareToFB('http://#{request.host}#{url_for(@post)}');", :id => "b-share-button", :class => "fb-share-button share-button", :alt => "Share On Facebook", :title => "Share On Facebook") %>
+        <%= image_tag("fbshare.png", :onclick => "javascript: shareToFB('http://#{request.host}#{url_for(@post)}');", :id => "fb-share-button", :class => "fb-share-button share-button", :alt => "Share On Facebook", :title => "Share On Facebook") %>
 
 
         <!-- Twitter Share Button -->
-        <a href="https://twitter.com/intent/tweet?text=<%= @post.title %>&url=<%= URI.encode("http://" + request.host + url_for(@post)) %>&hashtags=<%= @post.tags %>" class="twitter-share-button share-button" data-size="large" data-show-count="true">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a href="https://twitter.com/intent/tweet?text=<%= @post.title %>&url=<%= URI.encode("http://" + request.host + url_for(@post)) %>&hashtags=<%= @post.tags %>" class="twitter-share-button share-button" data-size="large" data-show-count="true">Tweet</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+        <% if user_signed_in? %>
+          <% if current_user.likes?(@post) %>
+            <%= link_to("#", class: "like disabled share-button", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+              <%= image_tag("fbliked.png") %>
+            <% end %>
+            <small></span><span class="liked">You liked this!</span></small>
+          <% else %>
+            <%= link_to("#", class: "like share-button", "data-link" => user_post_like_path(@user, @post), onclick: "javascript:like(event, this);") do %>
+              <%= image_tag("fblike.png") %>
+            <% end %>
+          <% end %>
+        <% end %>
+
       </div>
     </div>
   </div>
