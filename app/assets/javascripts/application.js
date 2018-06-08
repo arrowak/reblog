@@ -187,7 +187,7 @@ $(document).on('turbolinks:load', function() {
   $('.post-body p').has('img').css('text-indent', 0);
 
   $('[data-provider="summernote"]').summernote({
-    height: 200,
+    height: 400,
     callbacks: {
       onImageUpload: function(files){
         img = imageUpload(this, files[0]);
